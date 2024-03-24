@@ -1,0 +1,80 @@
+{
+    "CIFAR10": {
+        "mean": [0.49139968, 0.48215827, 0.44653124],
+        "std": [0.24703233, 0.24348505, 0.26158768],
+        "classes": ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"],
+        "train_transforms": [
+            "transforms.RandomCrop(32, padding=4)"
+        ],
+        "loader": "lambda root, train, download, transform: dset.CIFAR10(root=root, train=train, download=download, transform=transform)"
+        },    
+    "CIFAR100": {
+        "mean": [0.5071, 0.4865, 0.4409],
+        "std": [0.2673, 0.2564, 0.2762],
+        "classes": ["apple", "aquarium_fish", "baby", "bear", "beaver", "bed",
+               "bee", "beetle", "bicycle", "bottle", "bowl", "boy", "bridge",
+               "bus", "butterfly", "camel", "can", "castle", "caterpillar",
+               "cattle", "chair", "chimpanzee", "clock", "cloud", "cockroach",
+               "couch", "crab", "crocodile", "cup", "dinosaur", "dolphin",
+               "elephant", "flatfish", "forest", "fox", "girl", "hamster",
+               "house", "kangaroo", "keyboard", "lamp", "lawn_mower",
+               "leopard", "lion", "lizard", "lobster", "man", "maple_tree",
+               "motorcycle", "mountain", "mouse", "mushroom", "oak_tree",
+               "orange", "orchid", "otter", "palm_tree", "pear",
+               "pickup_truck", "pine_tree", "plain", "plate", "poppy",
+               "porcupine", "possum", "rabbit", "raccoon", "ray", "road",
+               "rocket", "rose", "sea", "seal", "shark", "shrew", "skunk",
+               "skyscraper", "snail", "snake", "spider", "squirrel",
+               "streetcar", "sunflower", "sweet_pepper", "table", "tank",
+               "telephone", "television", "tiger", "tractor", "train", "trout",
+               "tulip", "turtle", "wardrobe", "whale", "willow_tree", "wolf",
+               "woman", "worm"],
+        "train_transforms": [
+            "transforms.RandomCrop(32, padding=4)"
+        
+        ],
+        "loader": "lambda root, train, download, transform: dset.CIFAR100(root=root, train=train, download=download, transform=transform)"
+    },
+    "FashionMNIST": {
+        "mean": [0.2860402],
+        "std": [0.3530236],
+        "classes": ["T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
+            "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"],
+        "train_transforms": [
+            "transforms.RandomCrop(28, padding=4)"
+        ],
+        "loader": "lambda root, train, download, transform: dset.FashionMNIST(root=root, train=train, download=download, transform=transform)"
+    },
+    "KMNIST": {
+        "mean": [0.19036119],
+        "std": [0.34719803],
+        "classes": ["o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"],
+        "train_transforms": [
+            "transforms.RandomCrop(28, padding=4)"
+        ],
+        "loader": "lambda root, train, download, transform: dset.KMNIST(root=root, train=train, download=download, transform=transform)"
+    },
+    "EMNIST": {
+        "mean": [0.1751],
+        "std": [0.3332],
+        "classes": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+            "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+            "U", "V", "W", "X", "Y", "Z", "a", "b", "d", "e",
+            "f", "g", "h", "n", "q", "r", "t"],
+        "train_transforms": [
+            "transforms.RandomCrop(28, padding=4)"
+
+        ],
+        "loader": "lambda root, train, download, transform: dset.EMNIST(root=root, train=train, download=download, split='balanced', transform=transform)"
+    },
+    "IMAGENET-16-120": {
+        "data": "ImageNet-16-120",
+        "mean": [0.4817, 0.4578, 0.4079],
+        "std": [0.2470, 0.2435, 0.2615],
+        "num_classes": 120,
+        "train_transforms": [
+            "transforms.RandomCrop(16, padding=4)"
+        ]
+    }
+}
