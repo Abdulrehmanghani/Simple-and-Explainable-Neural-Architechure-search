@@ -1,6 +1,15 @@
 import torch
 import torch.nn as nn
 
+def red_blcks(input_shape):
+    count = 0
+    lesser = min(input_shape[2], input_shape[3])
+    while(lesser > 4):
+        lesser /= 2
+        # print(lesser)
+        count+=1
+    print('Reduction Blocks: ', count) 
+    return count
 class Conv(nn.Module):
     
   def __init__(self, C_in, C_out, kernel_size, stride, padding, affine=True):
@@ -32,12 +41,12 @@ class SepConv(nn.Module):
 
 class NetworkMix(nn.Module):
 
-  def __init__(self, C, num_classes, layers, mixnet_code, k_size, start_layer):
+  def __init__(self, C, num_classes, layers, mixnet_code, k_size, input_shape):
     super(NetworkMix, self).__init__()
     self._layers = layers
-    
-    stem_multiplier = 2
-    C_curr = stem_multiplier*C
+    start_layer = input_shape[1]
+    stem_multiplier = 0.25
+    C_curr = int(stem_multiplier*C)
     self.stem = nn.Sequential(
       nn.Conv2d(start_layer, C_curr, 3, padding=1, bias=False),
       nn.BatchNorm2d(C_curr)
@@ -47,10 +56,15 @@ class NetworkMix(nn.Module):
     
     self.mixlayers = nn.ModuleList()
     reduction_prev = False
-    
+    '''Number of reduction blocks return from the block calculation function
+    Genrate the list of of the reduction layers by using the totall nmber of layer
+    '''
+    num_reduction_blocks = red_blcks(input_shape)
+    reduction_list = [i * layers // (num_reduction_blocks+1) for i in range(1, num_reduction_blocks+1)]
+
     for i in range(layers):
-      if i in [layers//3, 2*layers//3]:
-        C_curr *= 2
+      if i in reduction_list:
+        C_curr = C * (reduction_list.index(i)+2)
         reduction = True
       else:
         reduction = False
