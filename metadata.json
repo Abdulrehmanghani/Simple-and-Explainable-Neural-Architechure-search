@@ -47,7 +47,7 @@
     },
     "KMNIST": {
         "mean": [0.19036119],
-        "std": [0.34719803],
+        "std": [0.34819803],
         "classes": ["o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"],
         "train_transforms": [
             "transforms.RandomCrop(28, padding=4)"
@@ -70,8 +70,8 @@
     },
     "IMAGENET-16-120": {
         "data": "ImageNet-16-120",
-        "mean": [0.4817, 0.4578, 0.4079],
-        "std": [0.2470, 0.2435, 0.2615],
+        "mean": [0.2064, 0.2005, 0.1736],
+        "std": [0.2808, 0.2729, 0.2514],
         "num_classes": 120,
         "train_transforms": [
             "transforms.RandomCrop(16, padding=4)"
