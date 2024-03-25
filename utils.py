@@ -69,7 +69,6 @@ class Cutout(object):
         img *= mask
         return img
 
-
 def get_datasets(args):
   with open('metadata.json', 'r') as f:
         dataset_info = json.load(f)
@@ -83,7 +82,7 @@ def get_datasets(args):
       std = dataset['std']
       train_transforms.append(transforms.RandomHorizontalFlip())
       train_transforms.append(transforms.ToTensor())
-      train_transforms.append(transforms.Normalize(mean, std))
+    #   train_transforms.append(transforms.Normalize(mean, std))
       # Additional transforms if needed (e.g., Cutout)
       if args.cutout:
           train_transforms.append(Cutout(args.cutout_length))
@@ -131,7 +130,7 @@ def get_loaders(args):
     # Get the first batch from the train queue
     train_features, train_labels = next(iter(train_loader))
   
-    return train_loader, valid_loader, test_loader, classes, train_features.size()[1]
+    return train_loader, valid_loader, test_loader, classes, train_features.size()
 
 # Fetch data loaders
 
