@@ -12,7 +12,8 @@ In case of imagenet16-20 download the dataset and unzip into the dataset folder 
 
 ## How to run
 To run the search code use the following command. 
-'python rubric.py --dataset KMNIST --datapath ../Neural_architecture_search/data/ --max_width 32 --save Kmnist_cutout --cutout --valid_size 0.5`
+
+`python rubric.py --dataset KMNIST --datapath ../Neural_architecture_search/data/ --max_width 32 --save Kmnist_cutout --cutout --valid_size 0.5`
 
 To run the training code use this command.
 
