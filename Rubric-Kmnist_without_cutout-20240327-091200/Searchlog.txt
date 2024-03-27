@@ -1,0 +1,2993 @@
+2024-03-27 09:12:00,629 GPU Device = 0
+2024-03-27 09:12:00,629 Arguments = Namespace(add_epochs=1, add_epochs_w=3, auto_augment=False, batch_size=64, ch_break_tolerance=3, ch_drop_tolerance=0.05, cutout=False, cutout_length=16, datapath='../Neural_architecture_search/data/', dataset='KMNIST', dp_add_tolerance=0.1, dp_break_tolerance=1, epochs=2, gpu=0, grad_clip=5, learning_rate=0.025, max_depth=100, max_width=32, min_depth=5, min_width=16, model_path='saved_models', momentum=0.9, report_freq=1, save='Rubric-Kmnist_without_cutout-20240327-091200', search=True, seed=20, target_acc=100.0, target_acc_tolerance=0.1, valid_size=0.5, weight_decay=0.0003, width_resolution=8)
+2024-03-27 09:12:00,872 #############################################################################
+2024-03-27 09:12:00,873 INITIALIZING DEPTH AND WIDTH SEARCH...
+2024-03-27 09:12:00,873 RUNNING MACRO SEARCH FIRST...
+2024-03-27 09:12:03,740 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (2): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:12:03,741 MODEL DETAILS
+2024-03-27 09:12:03,741 Model Depth 5 Model Width 16
+2024-03-27 09:12:03,741 Model Layers [0 0 0 0 0] Model Kernels [3 3 3 3 3]
+2024-03-27 09:12:03,742 Training epochs 2
+2024-03-27 09:12:03,742 Model Parameters = 0.011898MB
+2024-03-27 09:12:03,742 Training Model...
+2024-03-27 09:12:12,839 epoch 0 lr 6.250000e-03
+2024-03-27 09:12:12,839 train_acc 67.996666
+2024-03-27 09:12:12,839 valid_acc 79.656670
+2024-03-27 09:12:17,569 epoch 1 lr 0.000000e+00
+2024-03-27 09:12:17,570 train_acc 86.846664
+2024-03-27 09:12:17,570 valid_acc 86.776665
+2024-03-27 09:12:17,573 Best Training Accuracy 86.846664
+2024-03-27 09:12:17,573 Best Validation Accuracy 86.776665
+2024-03-27 09:12:19,902 Test Loss: 0.215004
+
+2024-03-27 09:12:19,903 Test Accuracy of     o: 91% (2748/3014)
+2024-03-27 09:12:19,903 Test Accuracy of    ki: 83% (2461/2949)
+2024-03-27 09:12:19,903 Test Accuracy of    su: 85% (2567/3002)
+2024-03-27 09:12:19,903 Test Accuracy of   tsu: 84% (2523/2998)
+2024-03-27 09:12:19,903 Test Accuracy of    na: 85% (2596/3034)
+2024-03-27 09:12:19,903 Test Accuracy of    ha: 86% (2585/2988)
+2024-03-27 09:12:19,903 Test Accuracy of    ma: 82% (2495/3026)
+2024-03-27 09:12:19,903 Test Accuracy of    ya: 91% (2675/2912)
+2024-03-27 09:12:19,903 Test Accuracy of    re: 92% (2779/3017)
+2024-03-27 09:12:19,903 Test Accuracy of    wo: 85% (2604/3060)
+2024-03-27 09:12:19,903 
+Test Accuracy (Overall): 86.776667% (26033/30000)
+2024-03-27 09:12:19,903 Baseline Train Acc 86.846664 Baseline Val Acc 86.776665
+2024-03-27 09:12:19,907 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (2): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (5): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:12:19,908 #############################################################################
+2024-03-27 09:12:19,908 Moving to Next Candidate Architecture...
+2024-03-27 09:12:19,908 MODEL DETAILS
+2024-03-27 09:12:19,908 Model Depth 6 Model Width 16
+2024-03-27 09:12:19,908 Model Layers [0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3]
+2024-03-27 09:12:19,908 Total number of epochs 2
+2024-03-27 09:12:19,908 Model Parameters = 0.013274MB
+2024-03-27 09:12:19,908 Depth Fail Count 0
+2024-03-27 09:12:19,909 Training Model...
+2024-03-27 09:12:24,778 epoch 0 lr 6.250000e-03
+2024-03-27 09:12:24,778 train_acc 75.520004
+2024-03-27 09:12:24,778 valid_acc 76.430000
+2024-03-27 09:12:29,640 epoch 1 lr 0.000000e+00
+2024-03-27 09:12:29,640 train_acc 90.136665
+2024-03-27 09:12:29,640 valid_acc 90.306671
+2024-03-27 09:12:29,644 Best Training Accuracy 90.136665
+2024-03-27 09:12:29,644 Best Validation Accuracy 90.306671
+2024-03-27 09:12:31,996 Test Loss: 0.162038
+
+2024-03-27 09:12:31,996 Test Accuracy of     o: 94% (2850/3014)
+2024-03-27 09:12:31,996 Test Accuracy of    ki: 89% (2631/2949)
+2024-03-27 09:12:31,996 Test Accuracy of    su: 86% (2601/3002)
+2024-03-27 09:12:31,997 Test Accuracy of   tsu: 94% (2840/2998)
+2024-03-27 09:12:31,997 Test Accuracy of    na: 84% (2576/3034)
+2024-03-27 09:12:31,997 Test Accuracy of    ha: 87% (2620/2988)
+2024-03-27 09:12:31,997 Test Accuracy of    ma: 87% (2647/3026)
+2024-03-27 09:12:31,997 Test Accuracy of    ya: 94% (2740/2912)
+2024-03-27 09:12:31,997 Test Accuracy of    re: 90% (2737/3017)
+2024-03-27 09:12:31,997 Test Accuracy of    wo: 93% (2850/3060)
+2024-03-27 09:12:31,997 
+Test Accuracy (Overall): 90.306667% (27092/30000)
+2024-03-27 09:12:31,997 Candidate Train Acc 90.136665 Candidate Val Acc 90.306671
+2024-03-27 09:12:31,997 Train Acc Diff 3.290001 Val Acc Diff 3.530006
+2024-03-27 09:12:31,998 Highest Train Acc 90.136665 Highest Val Acc 90.306671
+2024-03-27 09:12:32,001 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (2): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (5): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:12:32,002 #############################################################################
+2024-03-27 09:12:32,002 Moving to Next Candidate Architecture...
+2024-03-27 09:12:32,002 MODEL DETAILS
+2024-03-27 09:12:32,002 Model Depth 7 Model Width 16
+2024-03-27 09:12:32,002 Model Layers [0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3]
+2024-03-27 09:12:32,002 Total number of epochs 2
+2024-03-27 09:12:32,003 Model Parameters = 0.016106MB
+2024-03-27 09:12:32,003 Depth Fail Count 0
+2024-03-27 09:12:32,003 Training Model...
+2024-03-27 09:12:37,036 epoch 0 lr 6.250000e-03
+2024-03-27 09:12:37,036 train_acc 77.813332
+2024-03-27 09:12:37,036 valid_acc 89.893333
+2024-03-27 09:12:42,009 epoch 1 lr 0.000000e+00
+2024-03-27 09:12:42,009 train_acc 92.676666
+2024-03-27 09:12:42,009 valid_acc 92.456665
+2024-03-27 09:12:42,013 Best Training Accuracy 92.676666
+2024-03-27 09:12:42,013 Best Validation Accuracy 92.456665
+2024-03-27 09:12:44,357 Test Loss: 0.125748
+
+2024-03-27 09:12:44,357 Test Accuracy of     o: 91% (2768/3014)
+2024-03-27 09:12:44,357 Test Accuracy of    ki: 91% (2686/2949)
+2024-03-27 09:12:44,357 Test Accuracy of    su: 89% (2697/3002)
+2024-03-27 09:12:44,357 Test Accuracy of   tsu: 94% (2826/2998)
+2024-03-27 09:12:44,357 Test Accuracy of    na: 94% (2853/3034)
+2024-03-27 09:12:44,357 Test Accuracy of    ha: 93% (2785/2988)
+2024-03-27 09:12:44,358 Test Accuracy of    ma: 90% (2737/3026)
+2024-03-27 09:12:44,358 Test Accuracy of    ya: 95% (2776/2912)
+2024-03-27 09:12:44,358 Test Accuracy of    re: 90% (2736/3017)
+2024-03-27 09:12:44,358 Test Accuracy of    wo: 93% (2873/3060)
+2024-03-27 09:12:44,358 
+Test Accuracy (Overall): 92.456667% (27737/30000)
+2024-03-27 09:12:44,358 Candidate Train Acc 92.676666 Candidate Val Acc 92.456665
+2024-03-27 09:12:44,358 Train Acc Diff 2.540001 Val Acc Diff 2.149994
+2024-03-27 09:12:44,358 Highest Train Acc 92.676666 Highest Val Acc 92.456665
+2024-03-27 09:12:44,412 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (2): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (5): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:12:44,413 #############################################################################
+2024-03-27 09:12:44,413 Moving to Next Candidate Architecture...
+2024-03-27 09:12:44,413 MODEL DETAILS
+2024-03-27 09:12:44,413 Model Depth 8 Model Width 16
+2024-03-27 09:12:44,413 Model Layers [0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3]
+2024-03-27 09:12:44,413 Total number of epochs 2
+2024-03-27 09:12:44,414 Model Parameters = 0.016538MB
+2024-03-27 09:12:44,414 Depth Fail Count 0
+2024-03-27 09:12:44,414 Training Model...
+2024-03-27 09:12:49,874 epoch 0 lr 6.250000e-03
+2024-03-27 09:12:49,875 train_acc 76.426666
+2024-03-27 09:12:49,875 valid_acc 88.003334
+2024-03-27 09:12:55,368 epoch 1 lr 0.000000e+00
+2024-03-27 09:12:55,368 train_acc 93.110001
+2024-03-27 09:12:55,368 valid_acc 92.529999
+2024-03-27 09:12:55,372 Best Training Accuracy 93.110001
+2024-03-27 09:12:55,372 Best Validation Accuracy 92.529999
+2024-03-27 09:12:57,710 Test Loss: 0.120858
+
+2024-03-27 09:12:57,710 Test Accuracy of     o: 93% (2830/3014)
+2024-03-27 09:12:57,710 Test Accuracy of    ki: 93% (2755/2949)
+2024-03-27 09:12:57,710 Test Accuracy of    su: 91% (2741/3002)
+2024-03-27 09:12:57,710 Test Accuracy of   tsu: 93% (2816/2998)
+2024-03-27 09:12:57,710 Test Accuracy of    na: 93% (2831/3034)
+2024-03-27 09:12:57,710 Test Accuracy of    ha: 91% (2739/2988)
+2024-03-27 09:12:57,710 Test Accuracy of    ma: 84% (2560/3026)
+2024-03-27 09:12:57,710 Test Accuracy of    ya: 94% (2754/2912)
+2024-03-27 09:12:57,711 Test Accuracy of    re: 93% (2806/3017)
+2024-03-27 09:12:57,711 Test Accuracy of    wo: 95% (2927/3060)
+2024-03-27 09:12:57,711 
+Test Accuracy (Overall): 92.530000% (27759/30000)
+2024-03-27 09:12:57,711 Candidate Train Acc 93.110001 Candidate Val Acc 92.529999
+2024-03-27 09:12:57,711 Increasing Epoch in DEPTH block...
+2024-03-27 09:12:57,711 Highest Train Acc 92.676666 Highest Val Acc 92.456665
+2024-03-27 09:12:57,711 Train Acc Diff 0.433334 Val Acc Diff 0.073334
+2024-03-27 09:12:57,716 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (2): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (5): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:12:57,716 #############################################################################
+2024-03-27 09:12:57,716 Moving to Next Candidate Architecture...
+2024-03-27 09:12:57,716 MODEL DETAILS
+2024-03-27 09:12:57,716 Model Depth 8 Model Width 16
+2024-03-27 09:12:57,716 Model Layers [0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3]
+2024-03-27 09:12:57,717 Total number of epochs 3
+2024-03-27 09:12:57,717 Model Parameters = 0.016538MB
+2024-03-27 09:12:57,717 Depth Fail Count 1
+2024-03-27 09:12:57,717 Training Model...
+2024-03-27 09:13:03,208 epoch 0 lr 1.406250e-02
+2024-03-27 09:13:03,208 train_acc 77.980003
+2024-03-27 09:13:03,209 valid_acc 91.840004
+2024-03-27 09:13:08,692 epoch 1 lr 2.083333e-03
+2024-03-27 09:13:08,692 train_acc 95.663338
+2024-03-27 09:13:08,692 valid_acc 95.703331
+2024-03-27 09:13:14,266 epoch 2 lr 0.000000e+00
+2024-03-27 09:13:14,266 train_acc 96.896667
+2024-03-27 09:13:14,267 valid_acc 96.353333
+2024-03-27 09:13:14,271 Best Training Accuracy 96.896667
+2024-03-27 09:13:14,271 Best Validation Accuracy 96.353333
+2024-03-27 09:13:16,612 Test Loss: 0.063605
+
+2024-03-27 09:13:16,613 Test Accuracy of     o: 97% (2946/3014)
+2024-03-27 09:13:16,613 Test Accuracy of    ki: 96% (2834/2949)
+2024-03-27 09:13:16,613 Test Accuracy of    su: 94% (2835/3002)
+2024-03-27 09:13:16,613 Test Accuracy of   tsu: 97% (2917/2998)
+2024-03-27 09:13:16,613 Test Accuracy of    na: 94% (2879/3034)
+2024-03-27 09:13:16,613 Test Accuracy of    ha: 95% (2867/2988)
+2024-03-27 09:13:16,613 Test Accuracy of    ma: 94% (2863/3026)
+2024-03-27 09:13:16,613 Test Accuracy of    ya: 98% (2858/2912)
+2024-03-27 09:13:16,613 Test Accuracy of    re: 97% (2937/3017)
+2024-03-27 09:13:16,613 Test Accuracy of    wo: 97% (2970/3060)
+2024-03-27 09:13:16,613 
+Test Accuracy (Overall): 96.353333% (28906/30000)
+2024-03-27 09:13:16,613 Candidate Train Acc 96.896667 Candidate Val Acc 96.353333
+2024-03-27 09:13:16,614 Train Acc Diff 4.220001 Val Acc Diff 3.896667
+2024-03-27 09:13:16,614 Highest Train Acc 96.896667 Highest Val Acc 96.353333
+2024-03-27 09:13:16,618 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (2): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (5): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7-8): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:13:16,619 #############################################################################
+2024-03-27 09:13:16,619 Moving to Next Candidate Architecture...
+2024-03-27 09:13:16,619 MODEL DETAILS
+2024-03-27 09:13:16,619 Model Depth 9 Model Width 16
+2024-03-27 09:13:16,619 Model Layers [0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3]
+2024-03-27 09:13:16,620 Total number of epochs 3
+2024-03-27 09:13:16,620 Model Parameters = 0.021338MB
+2024-03-27 09:13:16,620 Depth Fail Count 0
+2024-03-27 09:13:16,620 Training Model...
+2024-03-27 09:13:22,323 epoch 0 lr 1.406250e-02
+2024-03-27 09:13:22,323 train_acc 80.946671
+2024-03-27 09:13:22,324 valid_acc 92.823334
+2024-03-27 09:13:28,008 epoch 1 lr 2.083333e-03
+2024-03-27 09:13:28,008 train_acc 96.426666
+2024-03-27 09:13:28,008 valid_acc 96.463333
+2024-03-27 09:13:33,626 epoch 2 lr 0.000000e+00
+2024-03-27 09:13:33,627 train_acc 97.349998
+2024-03-27 09:13:33,627 valid_acc 96.559998
+2024-03-27 09:13:33,632 Best Training Accuracy 97.349998
+2024-03-27 09:13:33,632 Best Validation Accuracy 96.559998
+2024-03-27 09:13:36,052 Test Loss: 0.056211
+
+2024-03-27 09:13:36,052 Test Accuracy of     o: 97% (2937/3014)
+2024-03-27 09:13:36,052 Test Accuracy of    ki: 97% (2864/2949)
+2024-03-27 09:13:36,053 Test Accuracy of    su: 95% (2853/3002)
+2024-03-27 09:13:36,053 Test Accuracy of   tsu: 97% (2923/2998)
+2024-03-27 09:13:36,053 Test Accuracy of    na: 95% (2895/3034)
+2024-03-27 09:13:36,053 Test Accuracy of    ha: 96% (2887/2988)
+2024-03-27 09:13:36,053 Test Accuracy of    ma: 95% (2890/3026)
+2024-03-27 09:13:36,053 Test Accuracy of    ya: 96% (2817/2912)
+2024-03-27 09:13:36,053 Test Accuracy of    re: 97% (2933/3017)
+2024-03-27 09:13:36,053 Test Accuracy of    wo: 97% (2969/3060)
+2024-03-27 09:13:36,053 
+Test Accuracy (Overall): 96.560000% (28968/30000)
+2024-03-27 09:13:36,053 Candidate Train Acc 97.349998 Candidate Val Acc 96.559998
+2024-03-27 09:13:36,053 Train Acc Diff 0.453331 Val Acc Diff 0.206665
+2024-03-27 09:13:36,054 Highest Train Acc 97.349998 Highest Val Acc 96.559998
+2024-03-27 09:13:36,058 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (2): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3-4): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (5): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-9): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:13:36,059 #############################################################################
+2024-03-27 09:13:36,059 Moving to Next Candidate Architecture...
+2024-03-27 09:13:36,059 MODEL DETAILS
+2024-03-27 09:13:36,059 Model Depth 10 Model Width 16
+2024-03-27 09:13:36,059 Model Layers [0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:13:36,060 Total number of epochs 3
+2024-03-27 09:13:36,060 Model Parameters = 0.022714MB
+2024-03-27 09:13:36,060 Depth Fail Count 0
+2024-03-27 09:13:36,060 Training Model...
+2024-03-27 09:13:41,938 epoch 0 lr 1.406250e-02
+2024-03-27 09:13:41,938 train_acc 79.483337
+2024-03-27 09:13:41,938 valid_acc 87.150002
+2024-03-27 09:13:47,880 epoch 1 lr 2.083333e-03
+2024-03-27 09:13:47,880 train_acc 96.010002
+2024-03-27 09:13:47,880 valid_acc 96.366669
+2024-03-27 09:13:53,834 epoch 2 lr 0.000000e+00
+2024-03-27 09:13:53,834 train_acc 97.163338
+2024-03-27 09:13:53,834 valid_acc 96.620003
+2024-03-27 09:13:53,839 Best Training Accuracy 97.163338
+2024-03-27 09:13:53,839 Best Validation Accuracy 96.620003
+2024-03-27 09:13:56,250 Test Loss: 0.057953
+
+2024-03-27 09:13:56,250 Test Accuracy of     o: 96% (2916/3014)
+2024-03-27 09:13:56,251 Test Accuracy of    ki: 96% (2832/2949)
+2024-03-27 09:13:56,251 Test Accuracy of    su: 95% (2865/3002)
+2024-03-27 09:13:56,251 Test Accuracy of   tsu: 96% (2891/2998)
+2024-03-27 09:13:56,251 Test Accuracy of    na: 96% (2931/3034)
+2024-03-27 09:13:56,251 Test Accuracy of    ha: 96% (2883/2988)
+2024-03-27 09:13:56,251 Test Accuracy of    ma: 95% (2876/3026)
+2024-03-27 09:13:56,251 Test Accuracy of    ya: 98% (2855/2912)
+2024-03-27 09:13:56,251 Test Accuracy of    re: 97% (2950/3017)
+2024-03-27 09:13:56,251 Test Accuracy of    wo: 97% (2987/3060)
+2024-03-27 09:13:56,251 
+Test Accuracy (Overall): 96.620000% (28986/30000)
+2024-03-27 09:13:56,251 Candidate Train Acc 97.163338 Candidate Val Acc 96.620003
+2024-03-27 09:13:56,252 Increasing Epoch in DEPTH block...
+2024-03-27 09:13:56,252 Highest Train Acc 97.349998 Highest Val Acc 96.559998
+2024-03-27 09:13:56,252 Train Acc Diff -0.186661 Val Acc Diff 0.060005
+2024-03-27 09:13:56,257 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (2): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3-4): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (5): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-9): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:13:56,258 #############################################################################
+2024-03-27 09:13:56,258 Moving to Next Candidate Architecture...
+2024-03-27 09:13:56,258 MODEL DETAILS
+2024-03-27 09:13:56,258 Model Depth 10 Model Width 16
+2024-03-27 09:13:56,258 Model Layers [0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:13:56,258 Total number of epochs 4
+2024-03-27 09:13:56,259 Model Parameters = 0.022714MB
+2024-03-27 09:13:56,259 Depth Fail Count 1
+2024-03-27 09:13:56,259 Training Model...
+2024-03-27 09:14:02,199 epoch 0 lr 1.821383e-02
+2024-03-27 09:14:02,199 train_acc 79.480003
+2024-03-27 09:14:02,199 valid_acc 91.980003
+2024-03-27 09:14:08,077 epoch 1 lr 7.322330e-03
+2024-03-27 09:14:08,077 train_acc 95.849998
+2024-03-27 09:14:08,077 valid_acc 94.213333
+2024-03-27 09:14:14,032 epoch 2 lr 1.072330e-03
+2024-03-27 09:14:14,032 train_acc 97.843338
+2024-03-27 09:14:14,032 valid_acc 97.110001
+2024-03-27 09:14:19,959 epoch 3 lr 0.000000e+00
+2024-03-27 09:14:19,959 train_acc 98.489998
+2024-03-27 09:14:19,959 valid_acc 97.166664
+2024-03-27 09:14:19,965 Best Training Accuracy 98.489998
+2024-03-27 09:14:19,965 Best Validation Accuracy 97.166664
+2024-03-27 09:14:22,383 Test Loss: 0.046144
+
+2024-03-27 09:14:22,383 Test Accuracy of     o: 97% (2951/3014)
+2024-03-27 09:14:22,383 Test Accuracy of    ki: 97% (2880/2949)
+2024-03-27 09:14:22,383 Test Accuracy of    su: 95% (2877/3002)
+2024-03-27 09:14:22,383 Test Accuracy of   tsu: 97% (2928/2998)
+2024-03-27 09:14:22,384 Test Accuracy of    na: 96% (2920/3034)
+2024-03-27 09:14:22,384 Test Accuracy of    ha: 97% (2914/2988)
+2024-03-27 09:14:22,384 Test Accuracy of    ma: 95% (2896/3026)
+2024-03-27 09:14:22,384 Test Accuracy of    ya: 97% (2847/2912)
+2024-03-27 09:14:22,384 Test Accuracy of    re: 97% (2955/3017)
+2024-03-27 09:14:22,384 Test Accuracy of    wo: 97% (2982/3060)
+2024-03-27 09:14:22,384 
+Test Accuracy (Overall): 97.166667% (29150/30000)
+2024-03-27 09:14:22,384 Candidate Train Acc 98.489998 Candidate Val Acc 97.166664
+2024-03-27 09:14:22,384 Train Acc Diff 1.139999 Val Acc Diff 0.606667
+2024-03-27 09:14:22,385 Highest Train Acc 98.489998 Highest Val Acc 97.166664
+2024-03-27 09:14:22,390 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (2): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3-4): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (5): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6-7): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (9-10): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:14:22,391 #############################################################################
+2024-03-27 09:14:22,391 Moving to Next Candidate Architecture...
+2024-03-27 09:14:22,391 MODEL DETAILS
+2024-03-27 09:14:22,391 Model Depth 11 Model Width 16
+2024-03-27 09:14:22,391 Model Layers [0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:14:22,391 Total number of epochs 4
+2024-03-27 09:14:22,392 Model Parameters = 0.025546MB
+2024-03-27 09:14:22,392 Depth Fail Count 0
+2024-03-27 09:14:22,392 Training Model...
+2024-03-27 09:14:28,561 epoch 0 lr 1.821383e-02
+2024-03-27 09:14:28,561 train_acc 81.730003
+2024-03-27 09:14:28,561 valid_acc 94.096664
+2024-03-27 09:14:34,639 epoch 1 lr 7.322330e-03
+2024-03-27 09:14:34,639 train_acc 96.306671
+2024-03-27 09:14:34,640 valid_acc 95.989998
+2024-03-27 09:14:40,768 epoch 2 lr 1.072330e-03
+2024-03-27 09:14:40,769 train_acc 98.206665
+2024-03-27 09:14:40,769 valid_acc 97.646667
+2024-03-27 09:14:46,902 epoch 3 lr 0.000000e+00
+2024-03-27 09:14:46,902 train_acc 98.733337
+2024-03-27 09:14:46,902 valid_acc 97.783333
+2024-03-27 09:14:46,908 Best Training Accuracy 98.733337
+2024-03-27 09:14:46,908 Best Validation Accuracy 97.783333
+2024-03-27 09:14:49,353 Test Loss: 0.036897
+
+2024-03-27 09:14:49,353 Test Accuracy of     o: 98% (2966/3014)
+2024-03-27 09:14:49,354 Test Accuracy of    ki: 97% (2877/2949)
+2024-03-27 09:14:49,354 Test Accuracy of    su: 96% (2899/3002)
+2024-03-27 09:14:49,354 Test Accuracy of   tsu: 98% (2951/2998)
+2024-03-27 09:14:49,354 Test Accuracy of    na: 97% (2954/3034)
+2024-03-27 09:14:49,354 Test Accuracy of    ha: 97% (2915/2988)
+2024-03-27 09:14:49,354 Test Accuracy of    ma: 97% (2936/3026)
+2024-03-27 09:14:49,354 Test Accuracy of    ya: 98% (2874/2912)
+2024-03-27 09:14:49,354 Test Accuracy of    re: 97% (2949/3017)
+2024-03-27 09:14:49,354 Test Accuracy of    wo: 98% (3014/3060)
+2024-03-27 09:14:49,354 
+Test Accuracy (Overall): 97.783333% (29335/30000)
+2024-03-27 09:14:49,355 Candidate Train Acc 98.733337 Candidate Val Acc 97.783333
+2024-03-27 09:14:49,355 Train Acc Diff 0.243340 Val Acc Diff 0.616669
+2024-03-27 09:14:49,355 Highest Train Acc 98.733337 Highest Val Acc 97.783333
+2024-03-27 09:14:49,361 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-5): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7-8): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (9): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (10-11): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:14:49,362 #############################################################################
+2024-03-27 09:14:49,362 Moving to Next Candidate Architecture...
+2024-03-27 09:14:49,362 MODEL DETAILS
+2024-03-27 09:14:49,362 Model Depth 12 Model Width 16
+2024-03-27 09:14:49,362 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:14:49,362 Total number of epochs 4
+2024-03-27 09:14:49,363 Model Parameters = 0.025978MB
+2024-03-27 09:14:49,363 Depth Fail Count 0
+2024-03-27 09:14:49,363 Training Model...
+2024-03-27 09:14:55,985 epoch 0 lr 1.821383e-02
+2024-03-27 09:14:55,985 train_acc 80.396667
+2024-03-27 09:14:55,985 valid_acc 93.080002
+2024-03-27 09:15:02,553 epoch 1 lr 7.322330e-03
+2024-03-27 09:15:02,554 train_acc 96.396667
+2024-03-27 09:15:02,554 valid_acc 96.066666
+2024-03-27 09:15:09,196 epoch 2 lr 1.072330e-03
+2024-03-27 09:15:09,197 train_acc 98.220001
+2024-03-27 09:15:09,197 valid_acc 97.523331
+2024-03-27 09:15:15,758 epoch 3 lr 0.000000e+00
+2024-03-27 09:15:15,758 train_acc 98.746666
+2024-03-27 09:15:15,758 valid_acc 97.583336
+2024-03-27 09:15:15,764 Best Training Accuracy 98.746666
+2024-03-27 09:15:15,764 Best Validation Accuracy 97.583336
+2024-03-27 09:15:18,310 Test Loss: 0.039380
+
+2024-03-27 09:15:18,310 Test Accuracy of     o: 98% (2956/3014)
+2024-03-27 09:15:18,311 Test Accuracy of    ki: 97% (2890/2949)
+2024-03-27 09:15:18,311 Test Accuracy of    su: 96% (2896/3002)
+2024-03-27 09:15:18,311 Test Accuracy of   tsu: 98% (2962/2998)
+2024-03-27 09:15:18,311 Test Accuracy of    na: 96% (2921/3034)
+2024-03-27 09:15:18,311 Test Accuracy of    ha: 97% (2903/2988)
+2024-03-27 09:15:18,311 Test Accuracy of    ma: 96% (2923/3026)
+2024-03-27 09:15:18,311 Test Accuracy of    ya: 98% (2874/2912)
+2024-03-27 09:15:18,311 Test Accuracy of    re: 97% (2949/3017)
+2024-03-27 09:15:18,311 Test Accuracy of    wo: 98% (3001/3060)
+2024-03-27 09:15:18,311 
+Test Accuracy (Overall): 97.583333% (29275/30000)
+2024-03-27 09:15:18,312 Candidate Train Acc 98.746666 Candidate Val Acc 97.583336
+2024-03-27 09:15:18,312 Increasing Epoch in DEPTH block...
+2024-03-27 09:15:18,312 Highest Train Acc 98.733337 Highest Val Acc 97.783333
+2024-03-27 09:15:18,312 Train Acc Diff 0.013329 Val Acc Diff -0.199997
+2024-03-27 09:15:18,318 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-5): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7-8): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (9): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (10-11): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:15:18,318 #############################################################################
+2024-03-27 09:15:18,319 Moving to Next Candidate Architecture...
+2024-03-27 09:15:18,319 MODEL DETAILS
+2024-03-27 09:15:18,319 Model Depth 12 Model Width 16
+2024-03-27 09:15:18,319 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:15:18,319 Total number of epochs 5
+2024-03-27 09:15:18,320 Model Parameters = 0.025978MB
+2024-03-27 09:15:18,320 Depth Fail Count 1
+2024-03-27 09:15:18,320 Training Model...
+2024-03-27 09:15:24,909 epoch 0 lr 2.045339e-02
+2024-03-27 09:15:24,910 train_acc 79.900002
+2024-03-27 09:15:24,910 valid_acc 89.059998
+2024-03-27 09:15:31,538 epoch 1 lr 1.184017e-02
+2024-03-27 09:15:31,538 train_acc 95.923332
+2024-03-27 09:15:31,538 valid_acc 95.950005
+2024-03-27 09:15:38,174 epoch 2 lr 4.559314e-03
+2024-03-27 09:15:38,174 train_acc 97.913338
+2024-03-27 09:15:38,174 valid_acc 97.733337
+2024-03-27 09:15:44,742 epoch 3 lr 6.598301e-04
+2024-03-27 09:15:44,742 train_acc 98.893333
+2024-03-27 09:15:44,742 valid_acc 98.016670
+2024-03-27 09:15:51,378 epoch 4 lr 0.000000e+00
+2024-03-27 09:15:51,379 train_acc 99.190002
+2024-03-27 09:15:51,379 valid_acc 98.093338
+2024-03-27 09:15:51,385 Best Training Accuracy 99.190002
+2024-03-27 09:15:51,385 Best Validation Accuracy 98.093338
+2024-03-27 09:15:53,842 Test Loss: 0.032256
+
+2024-03-27 09:15:53,842 Test Accuracy of     o: 98% (2976/3014)
+2024-03-27 09:15:53,842 Test Accuracy of    ki: 98% (2903/2949)
+2024-03-27 09:15:53,842 Test Accuracy of    su: 97% (2924/3002)
+2024-03-27 09:15:53,842 Test Accuracy of   tsu: 98% (2959/2998)
+2024-03-27 09:15:53,842 Test Accuracy of    na: 97% (2962/3034)
+2024-03-27 09:15:53,842 Test Accuracy of    ha: 98% (2930/2988)
+2024-03-27 09:15:53,842 Test Accuracy of    ma: 96% (2930/3026)
+2024-03-27 09:15:53,842 Test Accuracy of    ya: 98% (2874/2912)
+2024-03-27 09:15:53,843 Test Accuracy of    re: 97% (2947/3017)
+2024-03-27 09:15:53,843 Test Accuracy of    wo: 98% (3023/3060)
+2024-03-27 09:15:53,843 
+Test Accuracy (Overall): 98.093333% (29428/30000)
+2024-03-27 09:15:53,843 Candidate Train Acc 99.190002 Candidate Val Acc 98.093338
+2024-03-27 09:15:53,843 Train Acc Diff 0.456665 Val Acc Diff 0.310005
+2024-03-27 09:15:53,843 Highest Train Acc 99.190002 Highest Val Acc 98.093338
+2024-03-27 09:15:53,850 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-5): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7-8): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (9): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (10-12): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:15:53,851 #############################################################################
+2024-03-27 09:15:53,851 Moving to Next Candidate Architecture...
+2024-03-27 09:15:53,851 MODEL DETAILS
+2024-03-27 09:15:53,851 Model Depth 13 Model Width 16
+2024-03-27 09:15:53,851 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:15:53,851 Total number of epochs 5
+2024-03-27 09:15:53,852 Model Parameters = 0.030778MB
+2024-03-27 09:15:53,852 Depth Fail Count 0
+2024-03-27 09:15:53,852 Training Model...
+2024-03-27 09:16:00,632 epoch 0 lr 2.045339e-02
+2024-03-27 09:16:00,632 train_acc 82.669998
+2024-03-27 09:16:00,632 valid_acc 93.926666
+2024-03-27 09:16:07,408 epoch 1 lr 1.184017e-02
+2024-03-27 09:16:07,408 train_acc 96.320000
+2024-03-27 09:16:07,408 valid_acc 96.090004
+2024-03-27 09:16:14,131 epoch 2 lr 4.559314e-03
+2024-03-27 09:16:14,131 train_acc 98.029999
+2024-03-27 09:16:14,131 valid_acc 97.463333
+2024-03-27 09:16:20,923 epoch 3 lr 6.598301e-04
+2024-03-27 09:16:20,923 train_acc 99.013336
+2024-03-27 09:16:20,923 valid_acc 98.056671
+2024-03-27 09:16:27,692 epoch 4 lr 0.000000e+00
+2024-03-27 09:16:27,692 train_acc 99.290001
+2024-03-27 09:16:27,692 valid_acc 98.110001
+2024-03-27 09:16:27,698 Best Training Accuracy 99.290001
+2024-03-27 09:16:27,698 Best Validation Accuracy 98.110001
+2024-03-27 09:16:30,233 Test Loss: 0.031456
+
+2024-03-27 09:16:30,234 Test Accuracy of     o: 98% (2969/3014)
+2024-03-27 09:16:30,234 Test Accuracy of    ki: 98% (2897/2949)
+2024-03-27 09:16:30,234 Test Accuracy of    su: 97% (2929/3002)
+2024-03-27 09:16:30,234 Test Accuracy of   tsu: 98% (2957/2998)
+2024-03-27 09:16:30,234 Test Accuracy of    na: 98% (2974/3034)
+2024-03-27 09:16:30,234 Test Accuracy of    ha: 97% (2919/2988)
+2024-03-27 09:16:30,234 Test Accuracy of    ma: 97% (2946/3026)
+2024-03-27 09:16:30,234 Test Accuracy of    ya: 98% (2866/2912)
+2024-03-27 09:16:30,234 Test Accuracy of    re: 98% (2966/3017)
+2024-03-27 09:16:30,234 Test Accuracy of    wo: 98% (3010/3060)
+2024-03-27 09:16:30,234 
+Test Accuracy (Overall): 98.110000% (29433/30000)
+2024-03-27 09:16:30,235 Candidate Train Acc 99.290001 Candidate Val Acc 98.110001
+2024-03-27 09:16:30,235 Increasing Epoch in DEPTH block...
+2024-03-27 09:16:30,235 Highest Train Acc 99.190002 Highest Val Acc 98.093338
+2024-03-27 09:16:30,235 Train Acc Diff 0.099998 Val Acc Diff 0.016663
+2024-03-27 09:16:30,242 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-5): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7-8): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (9): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (10-12): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:16:30,242 #############################################################################
+2024-03-27 09:16:30,242 Moving to Next Candidate Architecture...
+2024-03-27 09:16:30,242 MODEL DETAILS
+2024-03-27 09:16:30,242 Model Depth 13 Model Width 16
+2024-03-27 09:16:30,242 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:16:30,243 Total number of epochs 6
+2024-03-27 09:16:30,243 Model Parameters = 0.030778MB
+2024-03-27 09:16:30,244 Depth Fail Count 1
+2024-03-27 09:16:30,244 Training Model...
+2024-03-27 09:16:37,023 epoch 0 lr 2.176282e-02
+2024-03-27 09:16:37,023 train_acc 81.349998
+2024-03-27 09:16:37,023 valid_acc 90.656670
+2024-03-27 09:16:43,752 epoch 1 lr 1.507214e-02
+2024-03-27 09:16:43,752 train_acc 95.863335
+2024-03-27 09:16:43,753 valid_acc 95.940002
+2024-03-27 09:16:50,547 epoch 2 lr 8.333333e-03
+2024-03-27 09:16:50,547 train_acc 97.639999
+2024-03-27 09:16:50,547 valid_acc 97.243332
+2024-03-27 09:16:57,336 epoch 3 lr 3.125000e-03
+2024-03-27 09:16:57,336 train_acc 98.906670
+2024-03-27 09:16:57,336 valid_acc 97.930000
+2024-03-27 09:17:04,087 epoch 4 lr 4.487298e-04
+2024-03-27 09:17:04,087 train_acc 99.356667
+2024-03-27 09:17:04,087 valid_acc 98.093338
+2024-03-27 09:17:10,895 epoch 5 lr 0.000000e+00
+2024-03-27 09:17:10,895 train_acc 99.570000
+2024-03-27 09:17:10,896 valid_acc 98.139999
+2024-03-27 09:17:10,902 Best Training Accuracy 99.570000
+2024-03-27 09:17:10,902 Best Validation Accuracy 98.139999
+2024-03-27 09:17:13,430 Test Loss: 0.030962
+
+2024-03-27 09:17:13,430 Test Accuracy of     o: 98% (2977/3014)
+2024-03-27 09:17:13,430 Test Accuracy of    ki: 98% (2908/2949)
+2024-03-27 09:17:13,430 Test Accuracy of    su: 97% (2933/3002)
+2024-03-27 09:17:13,430 Test Accuracy of   tsu: 98% (2950/2998)
+2024-03-27 09:17:13,430 Test Accuracy of    na: 97% (2967/3034)
+2024-03-27 09:17:13,430 Test Accuracy of    ha: 98% (2930/2988)
+2024-03-27 09:17:13,430 Test Accuracy of    ma: 96% (2931/3026)
+2024-03-27 09:17:13,430 Test Accuracy of    ya: 98% (2875/2912)
+2024-03-27 09:17:13,430 Test Accuracy of    re: 97% (2954/3017)
+2024-03-27 09:17:13,430 Test Accuracy of    wo: 98% (3017/3060)
+2024-03-27 09:17:13,430 
+Test Accuracy (Overall): 98.140000% (29442/30000)
+2024-03-27 09:17:13,431 Candidate Train Acc 99.570000 Candidate Val Acc 98.139999
+2024-03-27 09:17:13,431 Increasing CHANNELS in WIDTH block...
+2024-03-27 09:17:13,431 Highest Train Acc 99.190002 Highest Val Acc 98.093338
+2024-03-27 09:17:13,431 Train Acc Diff 0.379997 Val Acc Diff 0.046661
+2024-03-27 09:17:13,438 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(5, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(5, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+        (2): Conv2d(5, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-5): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7-8): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (9): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (10-12): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(80, 80, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=80, bias=False)
+        (2): Conv2d(80, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=80, out_features=10, bias=True)
+)
+2024-03-27 09:17:13,439 #############################################################################
+2024-03-27 09:17:13,439 Moving to Next Candidate Architecture...
+2024-03-27 09:17:13,439 MODEL DETAILS
+2024-03-27 09:17:13,439 Model Depth 13 Model Width 20
+2024-03-27 09:17:13,439 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:17:13,439 Total number of epochs 6
+2024-03-27 09:17:13,440 Model Parameters = 0.046170MB
+2024-03-27 09:17:13,440 Depth Fail Count 1
+2024-03-27 09:17:13,440 Training Model...
+2024-03-27 09:17:20,942 epoch 0 lr 2.176282e-02
+2024-03-27 09:17:20,942 train_acc 82.906670
+2024-03-27 09:17:20,942 valid_acc 92.279999
+2024-03-27 09:17:28,230 epoch 1 lr 1.507214e-02
+2024-03-27 09:17:28,230 train_acc 96.413338
+2024-03-27 09:17:28,230 valid_acc 96.760002
+2024-03-27 09:17:35,467 epoch 2 lr 8.333333e-03
+2024-03-27 09:17:35,468 train_acc 98.066666
+2024-03-27 09:17:35,468 valid_acc 97.459999
+2024-03-27 09:17:42,769 epoch 3 lr 3.125000e-03
+2024-03-27 09:17:42,769 train_acc 99.059998
+2024-03-27 09:17:42,769 valid_acc 98.196671
+2024-03-27 09:17:50,076 epoch 4 lr 4.487298e-04
+2024-03-27 09:17:50,076 train_acc 99.673332
+2024-03-27 09:17:50,076 valid_acc 98.313332
+2024-03-27 09:17:57,305 epoch 5 lr 0.000000e+00
+2024-03-27 09:17:57,305 train_acc 99.726669
+2024-03-27 09:17:57,305 valid_acc 98.303337
+2024-03-27 09:17:57,305 Best Training Accuracy 99.726669
+2024-03-27 09:17:57,305 Best Validation Accuracy 98.313332
+2024-03-27 09:17:59,865 Test Loss: 0.028220
+
+2024-03-27 09:17:59,866 Test Accuracy of     o: 99% (2985/3014)
+2024-03-27 09:17:59,866 Test Accuracy of    ki: 98% (2901/2949)
+2024-03-27 09:17:59,866 Test Accuracy of    su: 97% (2929/3002)
+2024-03-27 09:17:59,866 Test Accuracy of   tsu: 98% (2951/2998)
+2024-03-27 09:17:59,866 Test Accuracy of    na: 97% (2969/3034)
+2024-03-27 09:17:59,866 Test Accuracy of    ha: 98% (2942/2988)
+2024-03-27 09:17:59,866 Test Accuracy of    ma: 97% (2958/3026)
+2024-03-27 09:17:59,866 Test Accuracy of    ya: 98% (2881/2912)
+2024-03-27 09:17:59,866 Test Accuracy of    re: 98% (2964/3017)
+2024-03-27 09:17:59,866 Test Accuracy of    wo: 98% (3014/3060)
+2024-03-27 09:17:59,866 
+Test Accuracy (Overall): 98.313333% (29494/30000)
+2024-03-27 09:17:59,867 Candidate Train Acc 99.726669 Candidate Val Acc 98.313332
+2024-03-27 09:17:59,867 Train Acc Diff 0.536667 Val Acc Diff 0.219994
+2024-03-27 09:17:59,867 Highest Train Acc 99.726669 Highest Val Acc 98.313332
+2024-03-27 09:17:59,924 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(5, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(5, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+        (2): Conv2d(5, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-9): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (10): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11-13): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(80, 80, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=80, bias=False)
+        (2): Conv2d(80, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=80, out_features=10, bias=True)
+)
+2024-03-27 09:17:59,924 #############################################################################
+2024-03-27 09:17:59,924 Moving to Next Candidate Architecture...
+2024-03-27 09:17:59,925 MODEL DETAILS
+2024-03-27 09:17:59,925 Model Depth 14 Model Width 20
+2024-03-27 09:17:59,925 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:17:59,925 Total number of epochs 6
+2024-03-27 09:17:59,926 Model Parameters = 0.048210MB
+2024-03-27 09:17:59,926 Depth Fail Count 0
+2024-03-27 09:17:59,926 Training Model...
+2024-03-27 09:18:07,453 epoch 0 lr 2.176282e-02
+2024-03-27 09:18:07,453 train_acc 82.333336
+2024-03-27 09:18:07,454 valid_acc 93.256668
+2024-03-27 09:18:15,071 epoch 1 lr 1.507214e-02
+2024-03-27 09:18:15,071 train_acc 96.193336
+2024-03-27 09:18:15,071 valid_acc 95.090004
+2024-03-27 09:18:22,636 epoch 2 lr 8.333333e-03
+2024-03-27 09:18:22,637 train_acc 98.086670
+2024-03-27 09:18:22,637 valid_acc 96.966667
+2024-03-27 09:18:30,273 epoch 3 lr 3.125000e-03
+2024-03-27 09:18:30,273 train_acc 99.183334
+2024-03-27 09:18:30,273 valid_acc 98.076668
+2024-03-27 09:18:37,904 epoch 4 lr 4.487298e-04
+2024-03-27 09:18:37,904 train_acc 99.693336
+2024-03-27 09:18:37,904 valid_acc 98.253334
+2024-03-27 09:18:45,484 epoch 5 lr 0.000000e+00
+2024-03-27 09:18:45,485 train_acc 99.816666
+2024-03-27 09:18:45,485 valid_acc 98.246666
+2024-03-27 09:18:45,485 Best Training Accuracy 99.816666
+2024-03-27 09:18:45,485 Best Validation Accuracy 98.253334
+2024-03-27 09:18:48,187 Test Loss: 0.028514
+
+2024-03-27 09:18:48,187 Test Accuracy of     o: 98% (2972/3014)
+2024-03-27 09:18:48,188 Test Accuracy of    ki: 98% (2910/2949)
+2024-03-27 09:18:48,188 Test Accuracy of    su: 97% (2938/3002)
+2024-03-27 09:18:48,188 Test Accuracy of   tsu: 98% (2955/2998)
+2024-03-27 09:18:48,188 Test Accuracy of    na: 98% (2976/3034)
+2024-03-27 09:18:48,188 Test Accuracy of    ha: 97% (2916/2988)
+2024-03-27 09:18:48,188 Test Accuracy of    ma: 97% (2958/3026)
+2024-03-27 09:18:48,188 Test Accuracy of    ya: 98% (2882/2912)
+2024-03-27 09:18:48,188 Test Accuracy of    re: 98% (2967/3017)
+2024-03-27 09:18:48,188 Test Accuracy of    wo: 98% (3002/3060)
+2024-03-27 09:18:48,188 
+Test Accuracy (Overall): 98.253333% (29476/30000)
+2024-03-27 09:18:48,189 Candidate Train Acc 99.816666 Candidate Val Acc 98.253334
+2024-03-27 09:18:48,189 Increasing Epoch in DEPTH block...
+2024-03-27 09:18:48,189 Highest Train Acc 99.726669 Highest Val Acc 98.313332
+2024-03-27 09:18:48,189 Train Acc Diff 0.089996 Val Acc Diff -0.059998
+2024-03-27 09:18:48,196 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(5, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(5, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+        (2): Conv2d(5, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-9): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (10): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11-13): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(80, 80, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=80, bias=False)
+        (2): Conv2d(80, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=80, out_features=10, bias=True)
+)
+2024-03-27 09:18:48,197 #############################################################################
+2024-03-27 09:18:48,197 Moving to Next Candidate Architecture...
+2024-03-27 09:18:48,197 MODEL DETAILS
+2024-03-27 09:18:48,197 Model Depth 14 Model Width 20
+2024-03-27 09:18:48,197 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:18:48,197 Total number of epochs 7
+2024-03-27 09:18:48,198 Model Parameters = 0.048210MB
+2024-03-27 09:18:48,198 Depth Fail Count 1
+2024-03-27 09:18:48,198 Training Model...
+2024-03-27 09:18:55,768 epoch 0 lr 2.258552e-02
+2024-03-27 09:18:55,769 train_acc 82.650002
+2024-03-27 09:18:55,769 valid_acc 94.209999
+2024-03-27 09:19:03,410 epoch 1 lr 1.733142e-02
+2024-03-27 09:19:03,410 train_acc 96.110001
+2024-03-27 09:19:03,410 valid_acc 96.466667
+2024-03-27 09:19:11,053 epoch 2 lr 1.150729e-02
+2024-03-27 09:19:11,053 train_acc 97.923332
+2024-03-27 09:19:11,053 valid_acc 97.639999
+2024-03-27 09:19:18,641 epoch 3 lr 6.180607e-03
+2024-03-27 09:19:18,641 train_acc 98.903336
+2024-03-27 09:19:18,641 valid_acc 98.036667
+2024-03-27 09:19:26,290 epoch 4 lr 2.279160e-03
+2024-03-27 09:19:26,291 train_acc 99.603333
+2024-03-27 09:19:26,291 valid_acc 98.419998
+2024-03-27 09:19:33,942 epoch 5 lr 3.255943e-04
+2024-03-27 09:19:33,942 train_acc 99.806671
+2024-03-27 09:19:33,942 valid_acc 98.536667
+2024-03-27 09:19:41,506 epoch 6 lr 0.000000e+00
+2024-03-27 09:19:41,506 train_acc 99.853333
+2024-03-27 09:19:41,507 valid_acc 98.533333
+2024-03-27 09:19:41,507 Best Training Accuracy 99.853333
+2024-03-27 09:19:41,507 Best Validation Accuracy 98.536667
+2024-03-27 09:19:44,230 Test Loss: 0.025116
+
+2024-03-27 09:19:44,231 Test Accuracy of     o: 98% (2982/3014)
+2024-03-27 09:19:44,231 Test Accuracy of    ki: 98% (2902/2949)
+2024-03-27 09:19:44,231 Test Accuracy of    su: 98% (2944/3002)
+2024-03-27 09:19:44,231 Test Accuracy of   tsu: 98% (2964/2998)
+2024-03-27 09:19:44,231 Test Accuracy of    na: 98% (2993/3034)
+2024-03-27 09:19:44,231 Test Accuracy of    ha: 98% (2942/2988)
+2024-03-27 09:19:44,231 Test Accuracy of    ma: 97% (2956/3026)
+2024-03-27 09:19:44,231 Test Accuracy of    ya: 99% (2884/2912)
+2024-03-27 09:19:44,231 Test Accuracy of    re: 98% (2973/3017)
+2024-03-27 09:19:44,231 Test Accuracy of    wo: 98% (3021/3060)
+2024-03-27 09:19:44,231 
+Test Accuracy (Overall): 98.536667% (29561/30000)
+2024-03-27 09:19:44,232 Candidate Train Acc 99.853333 Candidate Val Acc 98.536667
+2024-03-27 09:19:44,232 Train Acc Diff 0.126663 Val Acc Diff 0.223335
+2024-03-27 09:19:44,232 Highest Train Acc 99.853333 Highest Val Acc 98.536667
+2024-03-27 09:19:44,239 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(5, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(5, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+        (2): Conv2d(5, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-10): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12-14): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(80, 80, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=80, bias=False)
+        (2): Conv2d(80, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=80, out_features=10, bias=True)
+)
+2024-03-27 09:19:44,240 #############################################################################
+2024-03-27 09:19:44,240 Moving to Next Candidate Architecture...
+2024-03-27 09:19:44,240 MODEL DETAILS
+2024-03-27 09:19:44,240 Model Depth 15 Model Width 20
+2024-03-27 09:19:44,240 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:19:44,240 Total number of epochs 7
+2024-03-27 09:19:44,241 Model Parameters = 0.052470MB
+2024-03-27 09:19:44,241 Depth Fail Count 0
+2024-03-27 09:19:44,241 Training Model...
+2024-03-27 09:19:52,025 epoch 0 lr 2.258552e-02
+2024-03-27 09:19:52,025 train_acc 81.203331
+2024-03-27 09:19:52,025 valid_acc 88.943336
+2024-03-27 09:19:59,884 epoch 1 lr 1.733142e-02
+2024-03-27 09:19:59,885 train_acc 95.623337
+2024-03-27 09:19:59,885 valid_acc 96.353333
+2024-03-27 09:20:07,738 epoch 2 lr 1.150729e-02
+2024-03-27 09:20:07,738 train_acc 97.856667
+2024-03-27 09:20:07,739 valid_acc 97.419998
+2024-03-27 09:20:15,529 epoch 3 lr 6.180607e-03
+2024-03-27 09:20:15,530 train_acc 98.833336
+2024-03-27 09:20:15,530 valid_acc 98.230003
+2024-03-27 09:20:23,401 epoch 4 lr 2.279160e-03
+2024-03-27 09:20:23,402 train_acc 99.566666
+2024-03-27 09:20:23,402 valid_acc 98.486671
+2024-03-27 09:20:31,276 epoch 5 lr 3.255943e-04
+2024-03-27 09:20:31,276 train_acc 99.836670
+2024-03-27 09:20:31,276 valid_acc 98.516670
+2024-03-27 09:20:39,047 epoch 6 lr 0.000000e+00
+2024-03-27 09:20:39,047 train_acc 99.900002
+2024-03-27 09:20:39,048 valid_acc 98.493332
+2024-03-27 09:20:39,048 Best Training Accuracy 99.900002
+2024-03-27 09:20:39,048 Best Validation Accuracy 98.516670
+2024-03-27 09:20:41,825 Test Loss: 0.024351
+
+2024-03-27 09:20:41,825 Test Accuracy of     o: 99% (2987/3014)
+2024-03-27 09:20:41,825 Test Accuracy of    ki: 98% (2910/2949)
+2024-03-27 09:20:41,825 Test Accuracy of    su: 98% (2948/3002)
+2024-03-27 09:20:41,825 Test Accuracy of   tsu: 98% (2950/2998)
+2024-03-27 09:20:41,825 Test Accuracy of    na: 97% (2970/3034)
+2024-03-27 09:20:41,825 Test Accuracy of    ha: 98% (2942/2988)
+2024-03-27 09:20:41,826 Test Accuracy of    ma: 97% (2963/3026)
+2024-03-27 09:20:41,826 Test Accuracy of    ya: 98% (2877/2912)
+2024-03-27 09:20:41,826 Test Accuracy of    re: 99% (2987/3017)
+2024-03-27 09:20:41,826 Test Accuracy of    wo: 98% (3021/3060)
+2024-03-27 09:20:41,826 
+Test Accuracy (Overall): 98.516667% (29555/30000)
+2024-03-27 09:20:41,826 Candidate Train Acc 99.900002 Candidate Val Acc 98.516670
+2024-03-27 09:20:41,826 Increasing Epoch in DEPTH block...
+2024-03-27 09:20:41,826 Highest Train Acc 99.853333 Highest Val Acc 98.536667
+2024-03-27 09:20:41,827 Train Acc Diff 0.046669 Val Acc Diff -0.019997
+2024-03-27 09:20:41,834 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(5, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(5, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+        (2): Conv2d(5, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-10): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12-14): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(80, 80, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=80, bias=False)
+        (2): Conv2d(80, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=80, out_features=10, bias=True)
+)
+2024-03-27 09:20:41,834 #############################################################################
+2024-03-27 09:20:41,835 Moving to Next Candidate Architecture...
+2024-03-27 09:20:41,835 MODEL DETAILS
+2024-03-27 09:20:41,835 Model Depth 15 Model Width 20
+2024-03-27 09:20:41,835 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:20:41,835 Total number of epochs 8
+2024-03-27 09:20:41,836 Model Parameters = 0.052470MB
+2024-03-27 09:20:41,836 Depth Fail Count 1
+2024-03-27 09:20:41,836 Training Model...
+2024-03-27 09:20:49,646 epoch 0 lr 2.313320e-02
+2024-03-27 09:20:49,646 train_acc 82.340004
+2024-03-27 09:20:49,646 valid_acc 92.480003
+2024-03-27 09:20:57,521 epoch 1 lr 1.893449e-02
+2024-03-27 09:20:57,521 train_acc 96.239998
+2024-03-27 09:20:57,522 valid_acc 96.133331
+2024-03-27 09:21:05,383 epoch 2 lr 1.399893e-02
+2024-03-27 09:21:05,384 train_acc 97.889999
+2024-03-27 09:21:05,384 valid_acc 96.933334
+2024-03-27 09:21:13,193 epoch 3 lr 9.040392e-03
+2024-03-27 09:21:13,193 train_acc 98.816666
+2024-03-27 09:21:13,193 valid_acc 97.933334
+2024-03-27 09:21:21,067 epoch 4 lr 4.763497e-03
+2024-03-27 09:21:21,067 train_acc 99.500000
+2024-03-27 09:21:21,067 valid_acc 98.500000
+2024-03-27 09:21:28,906 epoch 5 lr 1.737084e-03
+2024-03-27 09:21:28,906 train_acc 99.853333
+2024-03-27 09:21:28,906 valid_acc 98.559998
+2024-03-27 09:21:36,683 epoch 6 lr 2.472883e-04
+2024-03-27 09:21:36,684 train_acc 99.919998
+2024-03-27 09:21:36,684 valid_acc 98.620003
+2024-03-27 09:21:44,519 epoch 7 lr 0.000000e+00
+2024-03-27 09:21:44,520 train_acc 99.956665
+2024-03-27 09:21:44,520 valid_acc 98.593338
+2024-03-27 09:21:44,520 Best Training Accuracy 99.956665
+2024-03-27 09:21:44,520 Best Validation Accuracy 98.620003
+2024-03-27 09:21:47,224 Test Loss: 0.023797
+
+2024-03-27 09:21:47,224 Test Accuracy of     o: 98% (2982/3014)
+2024-03-27 09:21:47,224 Test Accuracy of    ki: 98% (2913/2949)
+2024-03-27 09:21:47,224 Test Accuracy of    su: 98% (2950/3002)
+2024-03-27 09:21:47,224 Test Accuracy of   tsu: 98% (2959/2998)
+2024-03-27 09:21:47,224 Test Accuracy of    na: 98% (2990/3034)
+2024-03-27 09:21:47,224 Test Accuracy of    ha: 98% (2946/2988)
+2024-03-27 09:21:47,224 Test Accuracy of    ma: 97% (2956/3026)
+2024-03-27 09:21:47,224 Test Accuracy of    ya: 99% (2889/2912)
+2024-03-27 09:21:47,224 Test Accuracy of    re: 98% (2975/3017)
+2024-03-27 09:21:47,225 Test Accuracy of    wo: 98% (3026/3060)
+2024-03-27 09:21:47,225 
+Test Accuracy (Overall): 98.620000% (29586/30000)
+2024-03-27 09:21:47,225 Candidate Train Acc 99.956665 Candidate Val Acc 98.620003
+2024-03-27 09:21:47,225 Increasing Epoch in WIDTH block...
+2024-03-27 09:21:47,225 Highest Train Acc 99.853333 Highest Val Acc 98.536667
+2024-03-27 09:21:47,225 Train Acc Diff 0.103333 Val Acc Diff 0.083336
+2024-03-27 09:21:47,233 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(5, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(5, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+        (2): Conv2d(5, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-10): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12-14): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(80, 80, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=80, bias=False)
+        (2): Conv2d(80, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=80, out_features=10, bias=True)
+)
+2024-03-27 09:21:47,234 #############################################################################
+2024-03-27 09:21:47,234 Moving to Next Candidate Architecture...
+2024-03-27 09:21:47,234 MODEL DETAILS
+2024-03-27 09:21:47,234 Model Depth 15 Model Width 20
+2024-03-27 09:21:47,234 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:21:47,234 Total number of epochs 9
+2024-03-27 09:21:47,235 Model Parameters = 0.052470MB
+2024-03-27 09:21:47,235 Depth Fail Count 1
+2024-03-27 09:21:47,235 Training Model...
+2024-03-27 09:21:55,099 epoch 0 lr 2.351505e-02
+2024-03-27 09:21:55,099 train_acc 80.406670
+2024-03-27 09:21:55,099 valid_acc 93.273331
+2024-03-27 09:22:02,924 epoch 1 lr 2.009927e-02
+2024-03-27 09:22:02,925 train_acc 95.570000
+2024-03-27 09:22:02,925 valid_acc 96.483337
+2024-03-27 09:22:10,774 epoch 2 lr 1.592542e-02
+2024-03-27 09:22:10,774 train_acc 97.300003
+2024-03-27 09:22:10,774 valid_acc 95.543335
+2024-03-27 09:22:18,636 epoch 3 lr 1.147875e-02
+2024-03-27 09:22:18,636 train_acc 98.263336
+2024-03-27 09:22:18,636 valid_acc 97.406670
+2024-03-27 09:22:26,436 epoch 4 lr 7.272807e-03
+2024-03-27 09:22:26,436 train_acc 99.153336
+2024-03-27 09:22:26,436 valid_acc 98.000000
+2024-03-27 09:22:34,264 epoch 5 lr 3.781682e-03
+2024-03-27 09:22:34,264 train_acc 99.683334
+2024-03-27 09:22:34,265 valid_acc 98.256668
+2024-03-27 09:22:42,081 epoch 6 lr 1.368380e-03
+2024-03-27 09:22:42,081 train_acc 99.876671
+2024-03-27 09:22:42,081 valid_acc 98.410004
+2024-03-27 09:22:49,899 epoch 7 lr 1.943200e-04
+2024-03-27 09:22:49,899 train_acc 99.923332
+2024-03-27 09:22:49,899 valid_acc 98.389999
+2024-03-27 09:22:57,765 epoch 8 lr 0.000000e+00
+2024-03-27 09:22:57,765 train_acc 99.946671
+2024-03-27 09:22:57,765 valid_acc 98.410004
+2024-03-27 09:22:57,766 Best Training Accuracy 99.946671
+2024-03-27 09:22:57,766 Best Validation Accuracy 98.410004
+2024-03-27 09:23:00,478 Test Loss: 0.028899
+
+2024-03-27 09:23:00,478 Test Accuracy of     o: 99% (2986/3014)
+2024-03-27 09:23:00,478 Test Accuracy of    ki: 98% (2906/2949)
+2024-03-27 09:23:00,478 Test Accuracy of    su: 98% (2945/3002)
+2024-03-27 09:23:00,478 Test Accuracy of   tsu: 98% (2949/2998)
+2024-03-27 09:23:00,478 Test Accuracy of    na: 97% (2970/3034)
+2024-03-27 09:23:00,478 Test Accuracy of    ha: 98% (2938/2988)
+2024-03-27 09:23:00,478 Test Accuracy of    ma: 97% (2952/3026)
+2024-03-27 09:23:00,478 Test Accuracy of    ya: 98% (2873/2912)
+2024-03-27 09:23:00,478 Test Accuracy of    re: 98% (2981/3017)
+2024-03-27 09:23:00,479 Test Accuracy of    wo: 98% (3023/3060)
+2024-03-27 09:23:00,479 
+Test Accuracy (Overall): 98.410000% (29523/30000)
+2024-03-27 09:23:00,479 Candidate Train Acc 99.946671 Candidate Val Acc 98.410004
+2024-03-27 09:23:00,479 Increasing CHANNELS in WIDTH block...
+2024-03-27 09:23:00,479 Highest Train Acc 99.853333 Highest Val Acc 98.536667
+2024-03-27 09:23:00,479 Train Acc Diff 0.093338 Val Acc Diff -0.126663
+2024-03-27 09:23:00,487 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 6, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(6, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(6, 6, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=6, bias=False)
+        (2): Conv2d(6, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(24, 24, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=24, bias=False)
+        (2): Conv2d(24, 24, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(24, 24, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=24, bias=False)
+        (2): Conv2d(24, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-10): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(72, 72, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=72, bias=False)
+        (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(72, 72, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=72, bias=False)
+        (2): Conv2d(72, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12-14): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(96, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=96, bias=False)
+        (2): Conv2d(96, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=96, out_features=10, bias=True)
+)
+2024-03-27 09:23:00,488 #############################################################################
+2024-03-27 09:23:00,488 Moving to Next Candidate Architecture...
+2024-03-27 09:23:00,488 MODEL DETAILS
+2024-03-27 09:23:00,488 Model Depth 15 Model Width 24
+2024-03-27 09:23:00,488 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:23:00,488 Total number of epochs 9
+2024-03-27 09:23:00,489 Model Parameters = 0.073450MB
+2024-03-27 09:23:00,489 Depth Fail Count 1
+2024-03-27 09:23:00,489 Training Model...
+2024-03-27 09:23:09,125 epoch 0 lr 2.351505e-02
+2024-03-27 09:23:09,125 train_acc 81.900002
+2024-03-27 09:23:09,125 valid_acc 93.253334
+2024-03-27 09:23:17,526 epoch 1 lr 2.009927e-02
+2024-03-27 09:23:17,527 train_acc 96.456665
+2024-03-27 09:23:17,527 valid_acc 95.473335
+2024-03-27 09:23:25,888 epoch 2 lr 1.592542e-02
+2024-03-27 09:23:25,888 train_acc 97.889999
+2024-03-27 09:23:25,888 valid_acc 97.739998
+2024-03-27 09:23:34,331 epoch 3 lr 1.147875e-02
+2024-03-27 09:23:34,331 train_acc 98.900002
+2024-03-27 09:23:34,331 valid_acc 97.966667
+2024-03-27 09:23:42,773 epoch 4 lr 7.272807e-03
+2024-03-27 09:23:42,774 train_acc 99.533333
+2024-03-27 09:23:42,774 valid_acc 98.559998
+2024-03-27 09:23:51,163 epoch 5 lr 3.781682e-03
+2024-03-27 09:23:51,163 train_acc 99.860001
+2024-03-27 09:23:51,163 valid_acc 98.690002
+2024-03-27 09:23:59,608 epoch 6 lr 1.368380e-03
+2024-03-27 09:23:59,608 train_acc 99.940002
+2024-03-27 09:23:59,608 valid_acc 98.693336
+2024-03-27 09:24:08,056 epoch 7 lr 1.943200e-04
+2024-03-27 09:24:08,056 train_acc 99.980003
+2024-03-27 09:24:08,056 valid_acc 98.690002
+2024-03-27 09:24:16,424 epoch 8 lr 0.000000e+00
+2024-03-27 09:24:16,424 train_acc 99.986671
+2024-03-27 09:24:16,424 valid_acc 98.686668
+2024-03-27 09:24:16,424 Best Training Accuracy 99.986671
+2024-03-27 09:24:16,424 Best Validation Accuracy 98.693336
+2024-03-27 09:24:19,347 Test Loss: 0.021768
+
+2024-03-27 09:24:19,348 Test Accuracy of     o: 99% (2995/3014)
+2024-03-27 09:24:19,348 Test Accuracy of    ki: 98% (2907/2949)
+2024-03-27 09:24:19,348 Test Accuracy of    su: 98% (2956/3002)
+2024-03-27 09:24:19,348 Test Accuracy of   tsu: 99% (2970/2998)
+2024-03-27 09:24:19,348 Test Accuracy of    na: 98% (2983/3034)
+2024-03-27 09:24:19,348 Test Accuracy of    ha: 98% (2949/2988)
+2024-03-27 09:24:19,348 Test Accuracy of    ma: 98% (2966/3026)
+2024-03-27 09:24:19,348 Test Accuracy of    ya: 98% (2879/2912)
+2024-03-27 09:24:19,348 Test Accuracy of    re: 98% (2972/3017)
+2024-03-27 09:24:19,348 Test Accuracy of    wo: 99% (3031/3060)
+2024-03-27 09:24:19,348 
+Test Accuracy (Overall): 98.693333% (29608/30000)
+2024-03-27 09:24:19,349 Candidate Train Acc 99.986671 Candidate Val Acc 98.693336
+2024-03-27 09:24:19,349 Train Acc Diff 0.133339 Val Acc Diff 0.156670
+2024-03-27 09:24:19,349 Highest Train Acc 99.986671 Highest Val Acc 98.693336
+2024-03-27 09:24:19,349 Discovered Final Depth 15
+2024-03-27 09:24:19,349 Epochs so far 9
+2024-03-27 09:24:19,349 END OF DEPTH SEARCH...
+2024-03-27 09:24:19,349 #############################################################################
+2024-03-27 09:24:19,349 #############################################################################
+2024-03-27 09:24:19,349 
+2024-03-27 09:24:19,349 RUNNING WIDTH SEARCH NOW...
+2024-03-27 09:24:19,357 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(5, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(5, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+        (2): Conv2d(5, 22, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(22, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(22, 22, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=22, bias=False)
+        (2): Conv2d(22, 22, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(22, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(22, 22, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=22, bias=False)
+        (2): Conv2d(22, 44, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(44, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(44, 44, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=44, bias=False)
+        (2): Conv2d(44, 44, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(44, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(44, 44, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=44, bias=False)
+        (2): Conv2d(44, 66, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(66, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-10): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(66, 66, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=66, bias=False)
+        (2): Conv2d(66, 66, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(66, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(66, 66, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=66, bias=False)
+        (2): Conv2d(66, 88, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(88, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12-14): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(88, 88, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=88, bias=False)
+        (2): Conv2d(88, 88, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(88, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=88, out_features=10, bias=True)
+)
+2024-03-27 09:24:19,357 Moving to Next Candidate Architecture...
+2024-03-27 09:24:19,357 MODEL DETAILS
+2024-03-27 09:24:19,358 Model Depth 15 Model Width 22
+2024-03-27 09:24:19,358 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:24:19,358 Total number of epochs 12.000000
+2024-03-27 09:24:19,359 Model Parameters = 0.062502MB
+2024-03-27 09:24:19,359 Training Model...
+2024-03-27 09:24:19,359 Width Fail Count 0
+2024-03-27 09:24:27,665 epoch 0 lr 2.415540e-02
+2024-03-27 09:24:27,665 train_acc 82.213333
+2024-03-27 09:24:27,665 valid_acc 95.163338
+2024-03-27 09:24:35,820 epoch 1 lr 2.214002e-02
+2024-03-27 09:24:35,820 train_acc 96.040001
+2024-03-27 09:24:35,820 valid_acc 94.226669
+2024-03-27 09:24:43,992 epoch 2 lr 1.952153e-02
+2024-03-27 09:24:43,992 train_acc 97.516670
+2024-03-27 09:24:43,992 valid_acc 94.559998
+2024-03-27 09:24:52,101 epoch 3 lr 1.647524e-02
+2024-03-27 09:24:52,101 train_acc 98.473335
+2024-03-27 09:24:52,101 valid_acc 97.450005
+2024-03-27 09:25:00,270 epoch 4 lr 1.320521e-02
+2024-03-27 09:25:00,270 train_acc 99.126671
+2024-03-27 09:25:00,270 valid_acc 98.290001
+2024-03-27 09:25:08,455 epoch 5 lr 9.929942e-03
+2024-03-27 09:25:08,455 train_acc 99.666664
+2024-03-27 09:25:08,456 valid_acc 98.356667
+2024-03-27 09:25:16,542 epoch 6 lr 6.866865e-03
+2024-03-27 09:25:16,543 train_acc 99.866669
+2024-03-27 09:25:16,543 valid_acc 98.603333
+2024-03-27 09:25:24,719 epoch 7 lr 4.216244e-03
+2024-03-27 09:25:24,719 train_acc 99.963333
+2024-03-27 09:25:24,719 valid_acc 98.720001
+2024-03-27 09:25:32,812 epoch 8 lr 2.144661e-03
+2024-03-27 09:25:32,812 train_acc 99.989998
+2024-03-27 09:25:32,812 valid_acc 98.760002
+2024-03-27 09:25:40,982 epoch 9 lr 7.660297e-04
+2024-03-27 09:25:40,982 train_acc 99.996666
+2024-03-27 09:25:40,983 valid_acc 98.726669
+2024-03-27 09:25:49,157 epoch 10 lr 1.083274e-04
+2024-03-27 09:25:49,157 train_acc 99.996666
+2024-03-27 09:25:49,158 valid_acc 98.756668
+2024-03-27 09:25:57,237 epoch 11 lr 0.000000e+00
+2024-03-27 09:25:57,237 train_acc 100.000000
+2024-03-27 09:25:57,237 valid_acc 98.746666
+2024-03-27 09:25:57,237 Best Training Accuracy 100.000000
+2024-03-27 09:25:57,237 Best Validation Accuracy 98.760002
+2024-03-27 09:26:00,093 Test Loss: 0.022285
+
+2024-03-27 09:26:00,093 Test Accuracy of     o: 99% (2990/3014)
+2024-03-27 09:26:00,093 Test Accuracy of    ki: 99% (2921/2949)
+2024-03-27 09:26:00,093 Test Accuracy of    su: 97% (2938/3002)
+2024-03-27 09:26:00,093 Test Accuracy of   tsu: 99% (2974/2998)
+2024-03-27 09:26:00,093 Test Accuracy of    na: 98% (2990/3034)
+2024-03-27 09:26:00,093 Test Accuracy of    ha: 98% (2946/2988)
+2024-03-27 09:26:00,094 Test Accuracy of    ma: 98% (2970/3026)
+2024-03-27 09:26:00,094 Test Accuracy of    ya: 99% (2890/2912)
+2024-03-27 09:26:00,094 Test Accuracy of    re: 98% (2985/3017)
+2024-03-27 09:26:00,094 Test Accuracy of    wo: 98% (3024/3060)
+2024-03-27 09:26:00,094 
+Test Accuracy (Overall): 98.760000% (29628/30000)
+2024-03-27 09:26:00,094 Candidate Train Acc 100.000000 Candidate Val Acc 98.760002
+2024-03-27 09:26:00,094 Train Acc Diff 0.013329 Val Acc Diff 0.066666
+2024-03-27 09:26:00,094 Highest Train Acc 100.000000 Highest Val Acc 98.760002
+2024-03-27 09:26:00,101 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(5, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(5, 5, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+        (2): Conv2d(5, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(20, 20, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=20, bias=False)
+        (2): Conv2d(20, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(40, 40, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=40, bias=False)
+        (2): Conv2d(40, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-10): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(60, 60, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=60, bias=False)
+        (2): Conv2d(60, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12-14): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(80, 80, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=80, bias=False)
+        (2): Conv2d(80, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=80, out_features=10, bias=True)
+)
+2024-03-27 09:26:00,102 Moving to Next Candidate Architecture...
+2024-03-27 09:26:00,102 MODEL DETAILS
+2024-03-27 09:26:00,102 Model Depth 15 Model Width 20
+2024-03-27 09:26:00,102 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:26:00,103 Total number of epochs 15.000000
+2024-03-27 09:26:00,103 Model Parameters = 0.052470MB
+2024-03-27 09:26:00,103 Training Model...
+2024-03-27 09:26:00,104 Width Fail Count 0
+2024-03-27 09:26:07,952 epoch 0 lr 2.445667e-02
+2024-03-27 09:26:07,952 train_acc 82.910004
+2024-03-27 09:26:07,952 valid_acc 91.520004
+2024-03-27 09:26:15,867 epoch 1 lr 2.313816e-02
+2024-03-27 09:26:15,867 train_acc 96.190002
+2024-03-27 09:26:15,867 valid_acc 93.856667
+2024-03-27 09:26:23,778 epoch 2 lr 2.137748e-02
+2024-03-27 09:26:23,778 train_acc 97.553337
+2024-03-27 09:26:23,778 valid_acc 97.309998
+2024-03-27 09:26:31,630 epoch 3 lr 1.925077e-02
+2024-03-27 09:26:31,630 train_acc 98.139999
+2024-03-27 09:26:31,630 valid_acc 97.090004
+2024-03-27 09:26:39,539 epoch 4 lr 1.685009e-02
+2024-03-27 09:26:39,539 train_acc 98.823334
+2024-03-27 09:26:39,540 valid_acc 97.380005
+2024-03-27 09:26:47,441 epoch 5 lr 1.427938e-02
+2024-03-27 09:26:47,441 train_acc 99.309998
+2024-03-27 09:26:47,441 valid_acc 98.046669
+2024-03-27 09:26:55,295 epoch 6 lr 1.164980e-02
+2024-03-27 09:26:55,295 train_acc 99.693336
+2024-03-27 09:26:55,295 valid_acc 98.419998
+2024-03-27 09:27:03,185 epoch 7 lr 9.074792e-03
+2024-03-27 09:27:03,185 train_acc 99.876671
+2024-03-27 09:27:03,185 valid_acc 98.586670
+2024-03-27 09:27:11,121 epoch 8 lr 6.664890e-03
+2024-03-27 09:27:11,121 train_acc 99.966667
+2024-03-27 09:27:11,122 valid_acc 98.639999
+2024-03-27 09:27:18,934 epoch 9 lr 4.522542e-03
+2024-03-27 09:27:18,934 train_acc 99.989998
+2024-03-27 09:27:18,934 valid_acc 98.616669
+2024-03-27 09:27:26,860 epoch 10 lr 2.736864e-03
+2024-03-27 09:27:26,860 train_acc 100.000000
+2024-03-27 09:27:26,860 valid_acc 98.663338
+2024-03-27 09:27:34,769 epoch 11 lr 1.377980e-03
+2024-03-27 09:27:34,769 train_acc 100.000000
+2024-03-27 09:27:34,769 valid_acc 98.686668
+2024-03-27 09:27:42,576 epoch 12 lr 4.892050e-04
+2024-03-27 09:27:42,576 train_acc 100.000000
+2024-03-27 09:27:42,576 valid_acc 98.683334
+2024-03-27 09:27:50,471 epoch 13 lr 6.904313e-05
+2024-03-27 09:27:50,471 train_acc 99.996666
+2024-03-27 09:27:50,471 valid_acc 98.680000
+2024-03-27 09:27:58,371 epoch 14 lr 0.000000e+00
+2024-03-27 09:27:58,371 train_acc 100.000000
+2024-03-27 09:27:58,372 valid_acc 98.683334
+2024-03-27 09:27:58,372 Best Training Accuracy 100.000000
+2024-03-27 09:27:58,372 Best Validation Accuracy 98.686668
+2024-03-27 09:28:01,064 Test Loss: 0.022501
+
+2024-03-27 09:28:01,064 Test Accuracy of     o: 99% (2996/3014)
+2024-03-27 09:28:01,064 Test Accuracy of    ki: 98% (2906/2949)
+2024-03-27 09:28:01,064 Test Accuracy of    su: 98% (2960/3002)
+2024-03-27 09:28:01,064 Test Accuracy of   tsu: 98% (2962/2998)
+2024-03-27 09:28:01,064 Test Accuracy of    na: 98% (2982/3034)
+2024-03-27 09:28:01,064 Test Accuracy of    ha: 98% (2945/2988)
+2024-03-27 09:28:01,064 Test Accuracy of    ma: 98% (2977/3026)
+2024-03-27 09:28:01,064 Test Accuracy of    ya: 99% (2883/2912)
+2024-03-27 09:28:01,064 Test Accuracy of    re: 98% (2975/3017)
+2024-03-27 09:28:01,064 Test Accuracy of    wo: 98% (3020/3060)
+2024-03-27 09:28:01,065 
+Test Accuracy (Overall): 98.686667% (29606/30000)
+2024-03-27 09:28:01,065 Candidate Train Acc 100.000000 Candidate Val Acc 98.686668
+2024-03-27 09:28:01,065 Train Acc Diff 0.000000 Val Acc Diff -0.073334
+2024-03-27 09:28:01,065 Highest Train Acc 100.000000 Highest Val Acc 98.760002
+2024-03-27 09:28:01,072 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 18, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(18, 18, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=18, bias=False)
+        (2): Conv2d(18, 18, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(18, 18, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=18, bias=False)
+        (2): Conv2d(18, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(36, 36, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=36, bias=False)
+        (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(36, 36, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=36, bias=False)
+        (2): Conv2d(36, 54, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(54, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-10): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(54, 54, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=54, bias=False)
+        (2): Conv2d(54, 54, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(54, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(54, 54, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=54, bias=False)
+        (2): Conv2d(54, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12-14): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(72, 72, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=72, bias=False)
+        (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=72, out_features=10, bias=True)
+)
+2024-03-27 09:28:01,073 Moving to Next Candidate Architecture...
+2024-03-27 09:28:01,073 MODEL DETAILS
+2024-03-27 09:28:01,073 Model Depth 15 Model Width 18
+2024-03-27 09:28:01,073 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:28:01,074 Total number of epochs 18.000000
+2024-03-27 09:28:01,074 Model Parameters = 0.043272MB
+2024-03-27 09:28:01,075 Training Model...
+2024-03-27 09:28:01,075 Width Fail Count 1
+2024-03-27 09:28:08,872 epoch 0 lr 2.462164e-02
+2024-03-27 09:28:08,872 train_acc 80.486664
+2024-03-27 09:28:08,872 valid_acc 86.506668
+2024-03-27 09:28:16,444 epoch 1 lr 2.369504e-02
+2024-03-27 09:28:16,444 train_acc 95.879997
+2024-03-27 09:28:16,444 valid_acc 94.730003
+2024-03-27 09:28:24,060 epoch 2 lr 2.243945e-02
+2024-03-27 09:28:24,060 train_acc 97.090004
+2024-03-27 09:28:24,060 valid_acc 96.120003
+2024-03-27 09:28:31,691 epoch 3 lr 2.089276e-02
+2024-03-27 09:28:31,691 train_acc 97.959999
+2024-03-27 09:28:31,691 valid_acc 97.403336
+2024-03-27 09:28:39,250 epoch 4 lr 1.910166e-02
+2024-03-27 09:28:39,250 train_acc 98.433334
+2024-03-27 09:28:39,250 valid_acc 97.669998
+2024-03-27 09:28:46,896 epoch 5 lr 1.712029e-02
+2024-03-27 09:28:46,896 train_acc 98.866669
+2024-03-27 09:28:46,897 valid_acc 97.893333
+2024-03-27 09:28:54,472 epoch 6 lr 1.500848e-02
+2024-03-27 09:28:54,472 train_acc 99.203331
+2024-03-27 09:28:54,472 valid_acc 98.103333
+2024-03-27 09:29:02,086 epoch 7 lr 1.283001e-02
+2024-03-27 09:29:02,086 train_acc 99.586670
+2024-03-27 09:29:02,086 valid_acc 98.470001
+2024-03-27 09:29:09,652 epoch 8 lr 1.065055e-02
+2024-03-27 09:29:09,652 train_acc 99.746666
+2024-03-27 09:29:09,652 valid_acc 98.563332
+2024-03-27 09:29:17,223 epoch 9 lr 8.535717e-03
+2024-03-27 09:29:17,223 train_acc 99.916664
+2024-03-27 09:29:17,223 valid_acc 98.580002
+2024-03-27 09:29:24,849 epoch 10 lr 6.548928e-03
+2024-03-27 09:29:24,849 train_acc 99.986671
+2024-03-27 09:29:24,849 valid_acc 98.753334
+2024-03-27 09:29:32,470 epoch 11 lr 4.749386e-03
+2024-03-27 09:29:32,471 train_acc 100.000000
+2024-03-27 09:29:32,471 valid_acc 98.739998
+2024-03-27 09:29:40,013 epoch 12 lr 3.190017e-03
+2024-03-27 09:29:40,014 train_acc 100.000000
+2024-03-27 09:29:40,014 valid_acc 98.736671
+2024-03-27 09:29:47,599 epoch 13 lr 1.915359e-03
+2024-03-27 09:29:47,599 train_acc 100.000000
+2024-03-27 09:29:47,599 valid_acc 98.726669
+2024-03-27 09:29:55,214 epoch 14 lr 9.590065e-04
+2024-03-27 09:29:55,214 train_acc 100.000000
+2024-03-27 09:29:55,214 valid_acc 98.739998
+2024-03-27 09:30:02,740 epoch 15 lr 3.393349e-04
+2024-03-27 09:30:02,741 train_acc 100.000000
+2024-03-27 09:30:02,741 valid_acc 98.730003
+2024-03-27 09:30:10,354 epoch 16 lr 4.783916e-05
+2024-03-27 09:30:10,354 train_acc 100.000000
+2024-03-27 09:30:10,354 valid_acc 98.763336
+2024-03-27 09:30:17,965 epoch 17 lr 0.000000e+00
+2024-03-27 09:30:17,965 train_acc 100.000000
+2024-03-27 09:30:17,966 valid_acc 98.753334
+2024-03-27 09:30:17,966 Best Training Accuracy 100.000000
+2024-03-27 09:30:17,966 Best Validation Accuracy 98.763336
+2024-03-27 09:30:20,650 Test Loss: 0.020549
+
+2024-03-27 09:30:20,650 Test Accuracy of     o: 99% (2993/3014)
+2024-03-27 09:30:20,650 Test Accuracy of    ki: 98% (2914/2949)
+2024-03-27 09:30:20,650 Test Accuracy of    su: 98% (2961/3002)
+2024-03-27 09:30:20,651 Test Accuracy of   tsu: 98% (2958/2998)
+2024-03-27 09:30:20,651 Test Accuracy of    na: 98% (2996/3034)
+2024-03-27 09:30:20,651 Test Accuracy of    ha: 98% (2949/2988)
+2024-03-27 09:30:20,651 Test Accuracy of    ma: 98% (2967/3026)
+2024-03-27 09:30:20,651 Test Accuracy of    ya: 98% (2881/2912)
+2024-03-27 09:30:20,651 Test Accuracy of    re: 98% (2981/3017)
+2024-03-27 09:30:20,651 Test Accuracy of    wo: 98% (3029/3060)
+2024-03-27 09:30:20,651 
+Test Accuracy (Overall): 98.763333% (29629/30000)
+2024-03-27 09:30:20,651 Candidate Train Acc 100.000000 Candidate Val Acc 98.763336
+2024-03-27 09:30:20,652 Train Acc Diff 0.000000 Val Acc Diff 0.003334
+2024-03-27 09:30:20,652 Highest Train Acc 100.000000 Highest Val Acc 98.763336
+2024-03-27 09:30:20,659 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-10): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12-14): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:30:20,660 Moving to Next Candidate Architecture...
+2024-03-27 09:30:20,660 MODEL DETAILS
+2024-03-27 09:30:20,660 Model Depth 15 Model Width 16
+2024-03-27 09:30:20,660 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:30:20,660 Total number of epochs 21.000000
+2024-03-27 09:30:20,661 Model Parameters = 0.034986MB
+2024-03-27 09:30:20,661 Training Model...
+2024-03-27 09:30:20,661 Width Fail Count 0
+2024-03-27 09:30:27,944 epoch 0 lr 2.472155e-02
+2024-03-27 09:30:27,944 train_acc 78.316666
+2024-03-27 09:30:27,944 valid_acc 93.336670
+2024-03-27 09:30:35,192 epoch 1 lr 2.403589e-02
+2024-03-27 09:30:35,192 train_acc 95.176666
+2024-03-27 09:30:35,192 valid_acc 96.463333
+2024-03-27 09:30:42,469 epoch 2 lr 2.309862e-02
+2024-03-27 09:30:42,469 train_acc 96.930000
+2024-03-27 09:30:42,470 valid_acc 96.980003
+2024-03-27 09:30:49,770 epoch 3 lr 2.193058e-02
+2024-03-27 09:30:49,770 train_acc 97.636665
+2024-03-27 09:30:49,770 valid_acc 97.446671
+2024-03-27 09:30:56,959 epoch 4 lr 2.055775e-02
+2024-03-27 09:30:56,959 train_acc 98.076668
+2024-03-27 09:30:56,959 valid_acc 97.580002
+2024-03-27 09:31:04,240 epoch 5 lr 1.901068e-02
+2024-03-27 09:31:04,240 train_acc 98.543335
+2024-03-27 09:31:04,240 valid_acc 97.136665
+2024-03-27 09:31:11,532 epoch 6 lr 1.732379e-02
+2024-03-27 09:31:11,532 train_acc 98.696671
+2024-03-27 09:31:11,532 valid_acc 97.956665
+2024-03-27 09:31:18,762 epoch 7 lr 1.553463e-02
+2024-03-27 09:31:18,762 train_acc 99.216667
+2024-03-27 09:31:18,763 valid_acc 97.730003
+2024-03-27 09:31:26,076 epoch 8 lr 1.368300e-02
+2024-03-27 09:31:26,076 train_acc 99.459999
+2024-03-27 09:31:26,076 valid_acc 98.493332
+2024-03-27 09:31:33,387 epoch 9 lr 1.181007e-02
+2024-03-27 09:31:33,387 train_acc 99.693336
+2024-03-27 09:31:33,387 valid_acc 98.580002
+2024-03-27 09:31:40,607 epoch 10 lr 9.957435e-03
+2024-03-27 09:31:40,607 train_acc 99.830002
+2024-03-27 09:31:40,607 valid_acc 98.593338
+2024-03-27 09:31:47,881 epoch 11 lr 8.166181e-03
+2024-03-27 09:31:47,882 train_acc 99.956665
+2024-03-27 09:31:47,882 valid_acc 98.736671
+2024-03-27 09:31:55,077 epoch 12 lr 6.475930e-03
+2024-03-27 09:31:55,077 train_acc 99.989998
+2024-03-27 09:31:55,077 valid_acc 98.776665
+2024-03-27 09:32:02,338 epoch 13 lr 4.923904e-03
+2024-03-27 09:32:02,339 train_acc 99.989998
+2024-03-27 09:32:02,339 valid_acc 98.793335
+2024-03-27 09:32:09,622 epoch 14 lr 3.543998e-03
+2024-03-27 09:32:09,622 train_acc 100.000000
+2024-03-27 09:32:09,622 valid_acc 98.823334
+2024-03-27 09:32:16,782 epoch 15 lr 2.365849e-03
+2024-03-27 09:32:16,782 train_acc 100.000000
+2024-03-27 09:32:16,782 valid_acc 98.796669
+2024-03-27 09:32:24,022 epoch 16 lr 1.413803e-03
+2024-03-27 09:32:24,022 train_acc 99.996666
+2024-03-27 09:32:24,023 valid_acc 98.809998
+2024-03-27 09:32:31,222 epoch 17 lr 7.055059e-04
+2024-03-27 09:32:31,222 train_acc 100.000000
+2024-03-27 09:32:31,222 valid_acc 98.790001
+2024-03-27 09:32:38,423 epoch 18 lr 2.491357e-04
+2024-03-27 09:32:38,423 train_acc 100.000000
+2024-03-27 09:32:38,423 valid_acc 98.793335
+2024-03-27 09:32:45,696 epoch 19 lr 3.509969e-05
+2024-03-27 09:32:45,697 train_acc 100.000000
+2024-03-27 09:32:45,697 valid_acc 98.786667
+2024-03-27 09:32:52,960 epoch 20 lr 0.000000e+00
+2024-03-27 09:32:52,960 train_acc 100.000000
+2024-03-27 09:32:52,960 valid_acc 98.786667
+2024-03-27 09:32:52,960 Best Training Accuracy 100.000000
+2024-03-27 09:32:52,961 Best Validation Accuracy 98.823334
+2024-03-27 09:32:55,650 Test Loss: 0.020573
+
+2024-03-27 09:32:55,651 Test Accuracy of     o: 99% (2991/3014)
+2024-03-27 09:32:55,651 Test Accuracy of    ki: 98% (2917/2949)
+2024-03-27 09:32:55,651 Test Accuracy of    su: 98% (2955/3002)
+2024-03-27 09:32:55,651 Test Accuracy of   tsu: 98% (2966/2998)
+2024-03-27 09:32:55,651 Test Accuracy of    na: 98% (2986/3034)
+2024-03-27 09:32:55,651 Test Accuracy of    ha: 99% (2959/2988)
+2024-03-27 09:32:55,651 Test Accuracy of    ma: 98% (2971/3026)
+2024-03-27 09:32:55,651 Test Accuracy of    ya: 99% (2884/2912)
+2024-03-27 09:32:55,651 Test Accuracy of    re: 99% (2987/3017)
+2024-03-27 09:32:55,651 Test Accuracy of    wo: 99% (3031/3060)
+2024-03-27 09:32:55,651 
+Test Accuracy (Overall): 98.823333% (29647/30000)
+2024-03-27 09:32:55,652 Candidate Train Acc 100.000000 Candidate Val Acc 98.823334
+2024-03-27 09:32:55,652 Train Acc Diff 0.000000 Val Acc Diff 0.059998
+2024-03-27 09:32:55,652 Highest Train Acc 100.000000 Highest Val Acc 98.823334
+2024-03-27 09:32:55,652 Discovered Final Width 16
+2024-03-27 09:32:55,652 Discovered Final Epochs 21
+2024-03-27 09:32:55,652 END OF WIDTH SEARCH...
+2024-03-27 09:32:55,652 #############################################################################
+2024-03-27 09:32:55,652 #############################################################################
+2024-03-27 09:32:55,652 
+2024-03-27 09:32:55,653 END OF SEARCH...
+2024-03-27 09:32:55,653 #############################################################################
+2024-03-27 09:32:55,653 #############################################################################
+2024-03-27 09:32:55,653 #############################################################################
+2024-03-27 09:32:55,653 
+2024-03-27 09:32:55,660 NetworkMix(
+  (stem): Sequential(
+    (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mixlayers): ModuleList(
+    (0): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4, bias=False)
+        (2): Conv2d(4, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1-2): 2 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (3): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(16, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+        (2): Conv2d(16, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (4-6): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=32, bias=False)
+        (2): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (8-10): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (2): Conv2d(48, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12-14): 3 x SepConv(
+      (op): Sequential(
+        (0): ReLU()
+        (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64, bias=False)
+        (2): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=64, out_features=10, bias=True)
+)
+2024-03-27 09:32:55,660 FINAL DISCOVERED ARCHITECTURE DETAILS:
+2024-03-27 09:32:55,660 Model Depth 15 Model Width 16
+2024-03-27 09:32:55,660 Discovered Final Epochs 21
+2024-03-27 09:32:55,661 Model Layers [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] Model Kernels [3 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+2024-03-27 09:32:55,662 Model Parameters = 0.034986MB
+2024-03-27 09:32:55,662 Training Accuracy 100.000000 Validation Accuracy 98.823334
+2024-03-27 09:32:55,666 Total Search Time: 1255s
