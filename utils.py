@@ -77,12 +77,18 @@ def get_datasets(args):
   
   if dataset_name in dataset_info:
       dataset = dataset_info[dataset_name]
-      train_transforms = [eval(t) for t in dataset['train_transforms']]      
       mean = dataset['mean']
       std = dataset['std']
-      train_transforms.append(transforms.RandomHorizontalFlip())
-      train_transforms.append(transforms.ToTensor())
-    #   train_transforms.append(transforms.Normalize(mean, std))
+      if args.search:
+        train_transforms = [ transforms.ToTensor(),
+          transforms.Normalize(mean, std)]
+        
+      else:  
+        train_transforms = [eval(t) for t in dataset['train_transforms']]      
+        
+        train_transforms.append(transforms.RandomHorizontalFlip())
+        train_transforms.append(transforms.ToTensor())
+        train_transforms.append(transforms.Normalize(mean, std))
       # Additional transforms if needed (e.g., Cutout)
       if args.cutout:
           train_transforms.append(Cutout(args.cutout_length))
@@ -122,7 +128,7 @@ def get_loaders(args):
     train_sampler = SubsetRandomSampler(train_idx)
     valid_sampler = SubsetRandomSampler(valid_idx)
     # Create DataLoader instances for train, validation, and test sets
-
+    
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, sampler=train_sampler, num_workers=2)
     valid_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, sampler=valid_sampler, num_workers=2)
     test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=args.batch_size, num_workers=2)
