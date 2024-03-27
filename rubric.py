@@ -17,7 +17,7 @@ from NetworkMix import NetworkMix
 
 
 parser = argparse.ArgumentParser("cifar")
-parser.add_argument('--dataset', type=str, default='AddNIST', help='location of the data corpus')
+parser.add_argument('--dataset', type=str, default='CIFAR10', help='location of the data corpus')
 parser.add_argument('--datapath', type=str, default='/home/sdki/Downloads/CVPR-data/AddNIST', help='location of the data corpus')
 
 parser.add_argument('--valid_size', type=float, default=0, help='validation data size')
@@ -28,12 +28,12 @@ parser.add_argument('--weight_decay', type=float, default=3e-4, help='weight dec
 parser.add_argument('--grad_clip', type=float, default=5, help='gradient clipping')
 parser.add_argument('--epochs', type=int, default=2, help='num of training epochs') 
 parser.add_argument('--auto_augment', action='store_true', default=False, help='use autoaugment')
-
+parser.add_argument('--search', action='store_true', default=False, help='use autoaugment')
 
 parser.add_argument('--report_freq', type=float, default=1, help='report frequency')
 parser.add_argument('--gpu', type=int, default=0, help='gpu device id')
 
-parser.add_argument('--cutout', action='store_true', default=True, help='use cutout')
+parser.add_argument('--cutout', action='store_true', default=False, help='use cutout')
 parser.add_argument('--cutout_length', type=int, default=16, help='cutout length')
 parser.add_argument('--model_path', type=str, default='saved_models', help='path to save the model')
 parser.add_argument('--save', type=str, default='AddNIST', help='experiment name')
@@ -69,7 +69,7 @@ def main():
   if not torch.cuda.is_available():
     logging.info('GPU not available.')
     sys.exit(1)
-
+ 
   np.random.seed(args.seed)
   torch.cuda.set_device(args.gpu)
   cudnn.benchmark = True
@@ -114,7 +114,7 @@ def main():
 
   model = NetworkMix(f_channels, len(classes), f_layers, curr_arch_ops, curr_arch_kernel, input_shape)
   model = model.cuda()                                                                                                                           
-
+  logging.info(model)
   logging.info('FINAL DISCOVERED ARCHITECTURE DETAILS:')
   logging.info("Model Depth %s Model Width %s", f_layers, f_channels)
   logging.info('Discovered Final Epochs %s', f_epochs)
@@ -150,14 +150,17 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
   logging.info('RUNNING MACRO SEARCH FIRST...')
 
   model = NetworkMix(channels, CIFAR_CLASSES, layers, curr_arch_ops, curr_arch_kernel, input_shape)
+  
   model = model.cuda()
+  logging.info(model)
   logging.info('MODEL DETAILS')
   logging.info("Model Depth %s Model Width %s", layers, channels)
   logging.info("Model Layers %s Model Kernels %s", curr_arch_ops, curr_arch_kernel)
   logging.info('Training epochs %s', args.epochs)
   logging.info("Model Parameters = %fMB", utils.count_parameters_in_MB(model))
   logging.info('Training Model...')
-  curr_arch_train_acc, curr_arch_test_acc = train_test(args, classes, model, train_queue, valid_queue, test_queue)
+  curr_arch_train_acc, curr_arch_test_acc = train_test(args, classes, model,
+   train_queue, valid_queue, valid_queue)
   logging.info("Baseline Train Acc %f Baseline Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
 
   # Search depth
@@ -178,7 +181,7 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
       next_arch_kernel = 3*np.ones((layers,), dtype=int)
       model = NetworkMix(channels, CIFAR_CLASSES, layers, next_arch_ops, next_arch_kernel, input_shape)
       model = model.cuda()
-      
+      logging.info(model)
       logging.info('#############################################################################')
       logging.info('Moving to Next Candidate Architecture...')
       logging.info('MODEL DETAILS')
@@ -188,7 +191,8 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
       logging.info("Model Parameters = %fMB", utils.count_parameters_in_MB(model))
       logging.info("Depth Fail Count %s", depth_fail_count)
       logging.info('Training Model...')
-      next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model, train_queue, valid_queue, test_queue)
+      next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model,
+       train_queue, valid_queue, valid_queue)
       logging.info("Candidate Train Acc %f Candidate Val Acc %f", next_arch_train_acc, next_arch_test_acc)
      
       # As long as we get significant improvement by increasing depth.
@@ -204,8 +208,6 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
         f_channels = channels
         f_epochs = args.epochs
         logging.info("Highest Train Acc %f Highest Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
-        
-
         
       elif((next_arch_test_acc < curr_arch_test_acc + args.dp_add_tolerance) and ((depth_fail_count != args.dp_break_tolerance))):
       #elif ((depth_fail_count != args.dp_break_tolerance)):
@@ -259,6 +261,7 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
     # Although these do not change.
     model = NetworkMix(channels, CIFAR_CLASSES, f_layers, curr_arch_ops, curr_arch_kernel, input_shape)
     model = model.cuda()
+    logging.info(model)
     args.epochs = args.epochs + args.add_epochs_w
 
     logging.info('Moving to Next Candidate Architecture...')
@@ -270,7 +273,8 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
     logging.info('Training Model...')
     logging.info("Width Fail Count %s", width_fail_count)
     # train and test candidate architecture.
-    next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model, train_queue, valid_queue, test_queue)
+    next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model, 
+    train_queue, valid_queue, valid_queue)
     logging.info("Candidate Train Acc %f Candidate Val Acc %f", next_arch_train_acc, next_arch_test_acc)
 
     if (next_arch_test_acc >= (curr_arch_test_acc - 0.0)):
