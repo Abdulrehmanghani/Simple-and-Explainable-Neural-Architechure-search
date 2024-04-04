@@ -28,7 +28,8 @@ parser.add_argument('--weight_decay', type=float, default=3e-4, help='weight dec
 parser.add_argument('--grad_clip', type=float, default=5, help='gradient clipping')
 parser.add_argument('--epochs', type=int, default=2, help='num of training epochs') 
 parser.add_argument('--auto_augment', action='store_true', default=False, help='use autoaugment')
-parser.add_argument('--search', action='store_true', default=False, help='use autoaugment')
+parser.add_argument('--random_crop', action='store_true', default=False, help='use autoaugment')
+parser.add_argument('--random_flip', action='store_true', default=False, help='use autoaugment')
 
 parser.add_argument('--report_freq', type=float, default=1, help='report frequency')
 parser.add_argument('--gpu', type=int, default=0, help='gpu device id')
@@ -160,7 +161,7 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
   logging.info("Model Parameters = %fMB", utils.count_parameters_in_MB(model))
   logging.info('Training Model...')
   curr_arch_train_acc, curr_arch_test_acc = train_test(args, classes, model,
-   train_queue, valid_queue, valid_queue)
+   train_queue, valid_queue, test_queue)
   logging.info("Baseline Train Acc %f Baseline Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
 
   # Search depth
@@ -192,7 +193,7 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
       logging.info("Depth Fail Count %s", depth_fail_count)
       logging.info('Training Model...')
       next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model,
-       train_queue, valid_queue, valid_queue)
+       train_queue, valid_queue, test_queue)
       logging.info("Candidate Train Acc %f Candidate Val Acc %f", next_arch_train_acc, next_arch_test_acc)
      
       # As long as we get significant improvement by increasing depth.
@@ -274,7 +275,7 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
     logging.info("Width Fail Count %s", width_fail_count)
     # train and test candidate architecture.
     next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model, 
-    train_queue, valid_queue, valid_queue)
+    train_queue, valid_queue, test_queue)
     logging.info("Candidate Train Acc %f Candidate Val Acc %f", next_arch_train_acc, next_arch_test_acc)
 
     if (next_arch_test_acc >= (curr_arch_test_acc - 0.0)):
