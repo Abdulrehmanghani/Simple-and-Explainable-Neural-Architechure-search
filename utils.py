@@ -72,23 +72,20 @@ class Cutout(object):
 def get_datasets(args):
   with open('metadata.json', 'r') as f:
         dataset_info = json.load(f)
-  
+  train_transforms = []
   dataset_name = args.dataset
   
   if dataset_name in dataset_info:
       dataset = dataset_info[dataset_name]
       mean = dataset['mean']
       std = dataset['std']
-      if args.search:
-        train_transforms = [ transforms.ToTensor(),
-          transforms.Normalize(mean, std)]
-        
-      else:  
-        train_transforms = [eval(t) for t in dataset['train_transforms']]      
-        
+      if args.random_crop:
+        train_transforms = [eval(t) for t in dataset['train_transforms']]
+      if args.random_flip:
         train_transforms.append(transforms.RandomHorizontalFlip())
-        train_transforms.append(transforms.ToTensor())
-        train_transforms.append(transforms.Normalize(mean, std))
+        
+      train_transforms.append(transforms.ToTensor())
+      train_transforms.append(transforms.Normalize(mean, std))
       # Additional transforms if needed (e.g., Cutout)
       if args.cutout:
           train_transforms.append(Cutout(args.cutout_length))
@@ -126,13 +123,13 @@ def get_loaders(args):
 
     # Define samplers for obtaining training and validation batches
     train_sampler = SubsetRandomSampler(train_idx)
-    valid_sampler = SubsetRandomSampler(valid_idx)
+    # valid_sampler = SubsetRandomSampler(valid_idx)
     # Create DataLoader instances for train, validation, and test sets
     
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, sampler=train_sampler, num_workers=2)
-    valid_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, sampler=valid_sampler, num_workers=2)
+    # valid_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, sampler=valid_sampler, num_workers=2)
     test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=args.batch_size, num_workers=2)
-    
+    valid_loader = test_loader
     # Get the first batch from the train queue
     train_features, train_labels = next(iter(train_loader))
   
@@ -163,8 +160,7 @@ def load(model, model_path):
 def create_exp_dir(path, scripts_to_save=None):
   if not os.path.exists(path):
     os.mkdir(path)
-    #os.mkdir(os.path.join(path, 'plots'))
-    #os.mkdir(os.path.join(path, 'gifs'))
+
 
   print('Experiment dir : {}'.format(path))
 
