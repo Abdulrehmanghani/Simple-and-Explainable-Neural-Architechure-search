@@ -6,7 +6,7 @@
         "train_transforms": [
             "transforms.RandomCrop(32, padding=4)"
         ],
-        "loader": "lambda root, train, download, transform: dset.CIFAR10(root=root, train=train, download=download, transform=transform)"
+        "loader": "lambda root, train, download: dset.CIFAR10(root=root, train=train, download=download)"
         },    
     "CIFAR100": {
         "mean": [0.5071, 0.4865, 0.4409],
@@ -33,7 +33,7 @@
             "transforms.RandomCrop(32, padding=4)"
         
         ],
-        "loader": "lambda root, train, download, transform: dset.CIFAR100(root=root, train=train, download=download, transform=transform)"
+        "loader": "lambda root, train, download: dset.CIFAR100(root=root, train=train, download=download)"
     },
     "FashionMNIST": {
         "mean": [0.2860402],
@@ -43,16 +43,15 @@
         "train_transforms": [
             "transforms.RandomCrop(28, padding=4)"
         ],
-        "loader": "lambda root, train, download, transform: dset.FashionMNIST(root=root, train=train, download=download, transform=transform)"
+        "loader": "lambda root, train, download: dset.FashionMNIST(root=root, train=train, download=download)"
     },
     "KMNIST": {
         "mean": [0.19036119],
         "std": [0.34819803],
         "classes": ["o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"],
-        "train_transforms": [
-            "transforms.RandomCrop(28, padding=4)"
+        "train_transforms": ["transforms.RandomCrop(28, padding=4)"
         ],
-        "loader": "lambda root, train, download, transform: dset.KMNIST(root=root, train=train, download=download, transform=transform)"
+        "loader": "lambda root, train, download: dset.KMNIST(root=root, train=train, download=download)"
     },
     "EMNIST": {
         "mean": [0.1751],
@@ -66,7 +65,7 @@
             "transforms.RandomCrop(28, padding=4)"
 
         ],
-        "loader": "lambda root, train, download, transform: dset.EMNIST(root=root, train=train, download=download, split='balanced', transform=transform)"
+        "loader": "lambda root, train, download: dset.EMNIST(root=root, train=train, download=download, split='balanced')"
     },
     "IMAGENET-16-120": {
         "data": "ImageNet-16-120",
