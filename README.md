@@ -22,3 +22,4 @@ To run the training code use this command.
 `python train.py --dataset 'KMNIST' --datapath ../datasets/ --save 'KMNIST_train'  --layers 15  --channels 16 --kernels 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 --ops 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 `
 
 `Note:` Keep the imagenet16-120 dataset folder by the name mentioned in the dataset list in the same datafolder
+Commit by Shahid.
