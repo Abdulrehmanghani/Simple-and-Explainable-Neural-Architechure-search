@@ -98,20 +98,21 @@ def get_datasets(args):
       ])
       
       if 'num_classes' in dataset:
-        train_data = ImageNet16(args.datapath + dataset['data'], True, train_transform, dataset['num_classes'])
-        test_data = ImageNet16(args.datapath + dataset['data'], False, valid_transform, dataset['num_classes'])
+        train_data = ImageNet16(args.datapath + dataset['data'], True, None, dataset['num_classes'])
+        test_data = ImageNet16(args.datapath + dataset['data'], False, None, dataset['num_classes'])
         classes = train_data.get_classes()
-        return train_data, test_data, classes
+        return train_data, test_data, classes, train_transform, valid_transform
       else:
-        train_loader = eval(dataset['loader'])(args.datapath, train=True, download=True, transform=train_transform)
-        test_loader = eval(dataset['loader'])(args.datapath, train=False, download=True, transform=valid_transform)
-        return train_loader, test_loader, dataset['classes']
+        train_loader = eval(dataset['loader'])(args.datapath, train=True, download=True)
+        test_loader = eval(dataset['loader'])(args.datapath, train=False, download=True)
+        
+        return train_loader, test_loader, dataset['classes'], train_transform , valid_transform
   else:
       raise ValueError("Dataset not supported")
 
 def get_loaders(args):
     # Fetch train and test datasets
-    train_dataset, test_dataset, classes = get_datasets(args)
+    train_dataset, test_dataset, classes, train_transform, valid_transform = get_datasets(args)
 
     # Split train dataset into train and validation sets
     valid_size = args.valid_size
@@ -124,15 +125,41 @@ def get_loaders(args):
     # Define samplers for obtaining training and validation batches
     train_sampler = SubsetRandomSampler(train_idx)
     # valid_sampler = SubsetRandomSampler(valid_idx)
+
     # Create DataLoader instances for train, validation, and test sets
-    
-    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, sampler=train_sampler, num_workers=2)
-    # valid_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, sampler=valid_sampler, num_workers=2)
-    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=args.batch_size, num_workers=2)
+    train_loader = torch.utils.data.DataLoader(
+    train_dataset,
+    batch_size=args.batch_size,
+    sampler=train_sampler,
+    num_workers=2,
+    collate_fn=lambda batch: (
+        torch.stack([train_transform(img) for img, _ in batch]),
+        torch.tensor([label for _, label in batch])
+    ))
+    # valid_loader = torch.utils.data.DataLoader(
+    # train_dataset,
+    # batch_size=args.batch_size,
+    # sampler=valid_sampler,
+    # num_workers=2,
+    # collate_fn=lambda batch: (
+    #     torch.stack([valid_transform(img) for img, _ in batch]),
+    #     torch.tensor([label for _, label in batch])
+    # ))
+
+    test_loader = torch.utils.data.DataLoader(
+    test_dataset,
+    batch_size=args.batch_size,
+    num_workers=2,
+    collate_fn=lambda batch: (
+        torch.stack([valid_transform(img) for img, _ in batch]),
+        torch.tensor([label for _, label in batch])
+    ))
+    #  in case of using valid sample from trainest comment line 148
     valid_loader = test_loader
     # Get the first batch from the train queue
     train_features, train_labels = next(iter(train_loader))
   
+    print(type(train_features),train_features.size())
     return train_loader, valid_loader, test_loader, classes, train_features.size()
 
 # Fetch data loaders
