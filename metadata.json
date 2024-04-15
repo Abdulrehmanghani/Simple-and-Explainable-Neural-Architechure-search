@@ -2,6 +2,7 @@
     "CIFAR10": {
         "mean": [0.49139968, 0.48215827, 0.44653124],
         "std": [0.24703233, 0.24348505, 0.26158768],
+        "policy": "CIFAR10Policy()",
         "classes": ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"],
         "train_transforms": [
             "transforms.RandomCrop(32, padding=4)"
@@ -11,6 +12,7 @@
     "CIFAR100": {
         "mean": [0.5071, 0.4865, 0.4409],
         "std": [0.2673, 0.2564, 0.2762],
+        "policy": "CIFAR100Policy()",
         "classes": ["apple", "aquarium_fish", "baby", "bear", "beaver", "bed",
                "bee", "beetle", "bicycle", "bottle", "bowl", "boy", "bridge",
                "bus", "butterfly", "camel", "can", "castle", "caterpillar",
@@ -38,6 +40,7 @@
     "FashionMNIST": {
         "mean": [0.2860402],
         "std": [0.3530236],
+        "policy": "FashionMNISTPolicy()",
         "classes": ["T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
             "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"],
         "train_transforms": [
@@ -48,6 +51,7 @@
     "KMNIST": {
         "mean": [0.19036119],
         "std": [0.34819803],
+        "policy": "KMNISTPolicy()",
         "classes": ["o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"],
         "train_transforms": ["transforms.RandomCrop(28, padding=4)"
         ],
@@ -56,6 +60,7 @@
     "EMNIST": {
         "mean": [0.1751],
         "std": [0.3332],
+        "policy": "EMNISTPolicy()",
         "classes": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
             "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
@@ -69,6 +74,7 @@
     },
     "IMAGENET-16-120": {
         "data": "ImageNet-16-120",
+        "policy": "ImageNetPolicy()",
         "mean": [0.2064, 0.2005, 0.1736],
         "std": [0.2808, 0.2729, 0.2514],
         "num_classes": 120,
