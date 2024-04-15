@@ -10,6 +10,12 @@ from torch.utils.data.sampler import SubsetRandomSampler
 
 from torch.autograd import Variable
 import torchvision.datasets as dset
+from autoaugment import CIFAR10Policy
+from autoaugment import CIFAR100Policy
+from autoaugment import KMNISTPolicy
+from autoaugment import EMNISTPolicy
+from autoaugment import ImageNetPolicy
+from autoaugment import FashionMNISTPolicy
 
 if sys.version_info[0] == 2:
     import cPickle as pickle
@@ -83,12 +89,19 @@ def get_datasets(args):
         train_transforms = [eval(t) for t in dataset['train_transforms']]
       if args.random_flip:
         train_transforms.append(transforms.RandomHorizontalFlip())
-        
-      train_transforms.append(transforms.ToTensor())
-      train_transforms.append(transforms.Normalize(mean, std))
+      train_transform = transforms.Compose(train_transforms)
+      if args.auto_augment:
+        print("\n\n\nAutoAugument Implemented!!!\n\n\n")
+        policy = eval(dataset['policy'])
+        train_transform.transforms.extend([policy,])
+
+
+      train_transform.transforms.extend([
+          transforms.ToTensor(),
+          transforms.Normalize(mean, std), ])
       # Additional transforms if needed (e.g., Cutout)
       if args.cutout:
-          train_transforms.append(Cutout(args.cutout_length))
+          train_transform.transforms.append(Cutout(args.cutout_length))
       
       # Define train and test transforms
       train_transform = transforms.Compose(train_transforms)
