@@ -83,7 +83,7 @@ def main():
   train_queue, valid_queue, test_queue, classes, input_shape = utils.get_loaders(args)
   
   # Run search on the fetched sub dataset.
-  curr_arch_ops, curr_arch_kernel, f_epochs, f_channels, f_layers, curr_arch_train_acc, curr_arch_test_acc = search_depth_and_width(args,   
+  curr_arch_ops, curr_arch_kernel, f_epochs, f_channels, f_layers, curr_arch_train_acc = search_depth_and_width(args,   
   	                                                                                                                      classes,
                                                                                                                           input_shape,        
                                                                                                                           train_queue,
@@ -93,7 +93,6 @@ def main():
   d_w_model_info = {'curr_arch_ops': curr_arch_ops,
                     'curr_arch_kernel': curr_arch_kernel,
                     'curr_arch_train_acc': curr_arch_train_acc,
-                    'curr_arch_test_acc': curr_arch_test_acc,
                     'f_channels': f_channels,
                     'f_layers': f_layers}
 
@@ -146,7 +145,6 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
   curr_arch_ops = next_arch_ops = np.zeros((layers,), dtype=int)
   curr_arch_kernel = next_arch_kernel = 3*np.ones((layers,), dtype=int)
   curr_arch_train_acc = next_arch_train_acc = 0.0
-  curr_arch_test_acc = next_arch_test_acc = 0.0
 
   logging.info('RUNNING MACRO SEARCH FIRST...')
 
@@ -160,85 +158,78 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
   logging.info('Training epochs %s', args.epochs)
   logging.info("Model Parameters = %fMB", utils.count_parameters_in_MB(model))
   logging.info('Training Model...')
-  curr_arch_train_acc, curr_arch_test_acc = train_test(args, classes, model,
+  curr_arch_train_acc = train_test(args, classes, model,
    train_queue, valid_queue, test_queue)
-  logging.info("Baseline Train Acc %f Baseline Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
+  logging.info("Baseline Train Acc %f", curr_arch_train_acc)
 
   # Search depth
   depth_fail_count = 0
   channels_up = False
 
-  while ((curr_arch_test_acc < (target_acc - target_acc_tolerance)) and (layers != max_depth)):
-    
-    # The possibility exists if trained for too long.
-    if (curr_arch_train_acc >= 99.9):
-      break;  
-      
-    else:
-      # prepare next candidate architecture.  
-      layers += 1
+  while ((curr_arch_train_acc < (target_acc - target_acc_tolerance)) and (layers != max_depth)):
+  
+    # prepare next candidate architecture.  
+    layers += 1
 
-      next_arch_ops = np.zeros((layers,), dtype=int)
-      next_arch_kernel = 3*np.ones((layers,), dtype=int)
-      model = NetworkMix(channels, CIFAR_CLASSES, layers, next_arch_ops, next_arch_kernel, input_shape)
-      model = model.cuda()
-      logging.info(model)
-      logging.info('#############################################################################')
-      logging.info('Moving to Next Candidate Architecture...')
-      logging.info('MODEL DETAILS')
-      logging.info("Model Depth %s Model Width %s", layers, channels)
-      logging.info("Model Layers %s Model Kernels %s", next_arch_ops, next_arch_kernel)
-      logging.info('Total number of epochs %s', args.epochs)
-      logging.info("Model Parameters = %fMB", utils.count_parameters_in_MB(model))
-      logging.info("Depth Fail Count %s", depth_fail_count)
-      logging.info('Training Model...')
-      next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model,
-       train_queue, valid_queue, test_queue)
-      logging.info("Candidate Train Acc %f Candidate Val Acc %f", next_arch_train_acc, next_arch_test_acc)
-     
-      # As long as we get significant improvement by increasing depth.
+    next_arch_ops = np.zeros((layers,), dtype=int)
+    next_arch_kernel = 3*np.ones((layers,), dtype=int)
+    model = NetworkMix(channels, CIFAR_CLASSES, layers, next_arch_ops, next_arch_kernel, input_shape)
+    model = model.cuda()
+    logging.info(model)
+    logging.info('#############################################################################')
+    logging.info('Moving to Next Candidate Architecture...')
+    logging.info('MODEL DETAILS')
+    logging.info("Model Depth %s Model Width %s", layers, channels)
+    logging.info("Model Layers %s Model Kernels %s", next_arch_ops, next_arch_kernel)
+    logging.info('Total number of epochs %s', args.epochs)
+    logging.info("Model Parameters = %fMB", utils.count_parameters_in_MB(model))
+    logging.info("Depth Fail Count %s", depth_fail_count)
+    logging.info('Training Model...')
+    next_arch_train_acc = train_test(args, classes, model,
+      train_queue, valid_queue, test_queue)
+    logging.info("Candidate Train Acc %f", next_arch_train_acc)
+    
+    # As long as we get significant improvement by increasing depth.
+    
+    if (next_arch_train_acc >= curr_arch_train_acc + args.dp_add_tolerance):
+      # update current architecture.
+      depth_fail_count = 0
+      curr_arch_ops = next_arch_ops
+      curr_arch_kernel = next_arch_kernel
+      logging.info("Train Acc Diff %f ", next_arch_train_acc-curr_arch_train_acc)
+      curr_arch_train_acc = next_arch_train_acc
+      f_channels = channels
+      f_epochs = args.epochs
+      logging.info("Highest Train Acc %f ", curr_arch_train_acc)
       
-      if (next_arch_test_acc >= curr_arch_test_acc + args.dp_add_tolerance):
-        # update current architecture.
-        depth_fail_count = 0
-        curr_arch_ops = next_arch_ops
-        curr_arch_kernel = next_arch_kernel
-        logging.info("Train Acc Diff %f Val Acc Diff %f", next_arch_train_acc-curr_arch_train_acc, next_arch_test_acc-curr_arch_test_acc)
-        curr_arch_train_acc = next_arch_train_acc
-        curr_arch_test_acc = next_arch_test_acc
-        f_channels = channels
-        f_epochs = args.epochs
-        logging.info("Highest Train Acc %f Highest Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
-        
-      elif((next_arch_test_acc < curr_arch_test_acc + args.dp_add_tolerance) and ((depth_fail_count != args.dp_break_tolerance))):
-      #elif ((depth_fail_count != args.dp_break_tolerance)):
-        depth_fail_count += 1
+    elif((next_arch_train_acc < curr_arch_train_acc + args.dp_add_tolerance) and ((depth_fail_count != args.dp_break_tolerance))):
+      depth_fail_count += 1
+      layers -= 1
+      args.epochs = args.epochs + args.add_epochs
+      logging.info('Increasing Epoch in DEPTH block...')
+      logging.info("Highest Train Acc %f ", curr_arch_train_acc)
+      logging.info("Train Acc Diff %f ", next_arch_train_acc-curr_arch_train_acc)
+      continue
+      
+    elif(channels != max_width):
+      if not channels_up:
         layers -= 1
+        channels += int(width_resolution/2)
+        channels_up = True
+        logging.info('Increasing CHANNELS in WIDTH block...')
+      else: 
+        logging.info('Increasing Epoch in WIDTH block...')
         args.epochs = args.epochs + args.add_epochs
-        logging.info('Increasing Epoch in DEPTH block...')
-        logging.info("Highest Train Acc %f Highest Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
-        logging.info("Train Acc Diff %f Val Acc Diff %f", next_arch_train_acc-curr_arch_train_acc, next_arch_test_acc-curr_arch_test_acc)
-        continue
-        
-      elif(channels != max_width):
-        if not channels_up:
-          layers -= 1
-          channels += int(width_resolution/2)
-          channels_up = True
-          logging.info('Increasing CHANNELS in WIDTH block...')
-        else: 
-          logging.info('Increasing Epoch in WIDTH block...')
-          args.epochs = args.epochs + args.add_epochs
-          channels_up = False
-          layers -= 1
-                
-        logging.info("Highest Train Acc %f Highest Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
-        logging.info("Train Acc Diff %f Val Acc Diff %f", next_arch_train_acc-curr_arch_train_acc, next_arch_test_acc-curr_arch_test_acc)
-      else:
-        logging.info('INCREASING CHANNELS REPEAT...')
-        logging.info("Highest Train Acc %f Highest Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
-        logging.info("Train Acc Diff %f Val Acc Diff %f", next_arch_train_acc-curr_arch_train_acc, next_arch_test_acc-curr_arch_test_acc)
-        break
+        channels_up = False
+        layers -= 1
+              
+      logging.info("Highest Train Acc %f ", curr_arch_train_acc)
+      logging.info("Train Acc Diff %f ", next_arch_train_acc-curr_arch_train_acc)
+    else:
+      logging.info('INCREASING CHANNELS REPEAT...')
+      logging.info("Highest Train Acc %f ", curr_arch_train_acc)
+      logging.info("Train Acc Diff %f ", next_arch_train_acc-curr_arch_train_acc)
+      break
   # Search width
   # During width search lenght of curr_arch_ops and curr_arch_kernel shall not change but only channels.
 
@@ -247,7 +238,6 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
   logging.info('Discovered Final Depth %s', f_layers)
   logging.info('Epochs so far %s', f_epochs)
   logging.info('END OF DEPTH SEARCH...')
-  best_arch_test_acc = curr_arch_test_acc
   best_arch_train_acc = curr_arch_train_acc
   logging.info('#############################################################################')
   logging.info('#############################################################################')
@@ -274,30 +264,28 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
     logging.info('Training Model...')
     logging.info("Width Fail Count %s", width_fail_count)
     # train and test candidate architecture.
-    next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model, 
+    next_arch_train_acc = train_test(args, classes, model, 
     train_queue, valid_queue, test_queue)
-    logging.info("Candidate Train Acc %f Candidate Val Acc %f", next_arch_train_acc, next_arch_test_acc)
+    logging.info("Candidate Train Acc %f ", next_arch_train_acc)
 
-    if (next_arch_test_acc >= (curr_arch_test_acc - 0.0)):
+    if (next_arch_train_acc >= (curr_arch_train_acc - 0.0)):
 
-      logging.info("Train Acc Diff %f Val Acc Diff %f", next_arch_train_acc-curr_arch_train_acc, next_arch_test_acc-curr_arch_test_acc)
+      logging.info("Train Acc Diff %f ", next_arch_train_acc-curr_arch_train_acc)
       curr_arch_train_acc = next_arch_train_acc
-      curr_arch_test_acc = next_arch_test_acc
-      #best_arch_train_acc = curr_arch_train_acc
-      #best_arch_test_acc = curr_arch_test_acc
+    
       f_channels = channels 
       f_epochs = args.epochs
-      logging.info("Highest Train Acc %f Highest Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
+      logging.info("Highest Train Acc %f ", curr_arch_train_acc)
       width_fail_count = 0
     elif (width_fail_count != args.ch_break_tolerance):
       width_fail_count += 1
-      logging.info("Train Acc Diff %f Val Acc Diff %f", next_arch_train_acc-curr_arch_train_acc, next_arch_test_acc-curr_arch_test_acc)
-      logging.info("Highest Train Acc %f Highest Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
+      logging.info("Train Acc Diff %f", next_arch_train_acc-curr_arch_train_acc)
+      logging.info("Highest Train Acc %f ", curr_arch_train_acc)
 
       continue
     else:
-      logging.info("Train Acc Diff %f Val Acc Diff %f", next_arch_train_acc-curr_arch_train_acc, next_arch_test_acc-curr_arch_test_acc)
-      logging.info("Highest Train Acc %f Highest Val Acc %f", curr_arch_train_acc, curr_arch_test_acc)
+      logging.info("Train Acc Diff %f ", next_arch_train_acc-curr_arch_train_acc)
+      logging.info("Highest Train Acc %f ", curr_arch_train_acc)
 
       break; 
 
@@ -308,7 +296,7 @@ def search_depth_and_width(args, classes, input_shape, train_queue, valid_queue,
   logging.info('#############################################################################')
   logging.info('')  
 
-  return curr_arch_ops, curr_arch_kernel, f_epochs, f_channels, f_layers, curr_arch_train_acc, curr_arch_test_acc
+  return curr_arch_ops, curr_arch_kernel, f_epochs, f_channels, f_layers, curr_arch_train_acc
 
 def search_operations(args, classes, input_shape, train_queue, valid_queue, test_queue, model_info):
 
@@ -318,7 +306,7 @@ def search_operations(args, classes, input_shape, train_queue, valid_queue, test
   curr_arch_ops = model_info['curr_arch_ops']
   curr_arch_kernel = model_info['curr_arch_kernel']
   curr_arch_train_acc = model_info['curr_arch_train_acc']
-  curr_arch_test_acc = model_info['curr_arch_test_acc']
+  # curr_arch_test_acc = model_info['curr_arch_test_acc']
   channels = model_info['f_channels']
   layers = model_info['f_layers']
 
@@ -342,19 +330,19 @@ def search_operations(args, classes, input_shape, train_queue, valid_queue, test
       logging.info('Total number of epochs %f', args.epochs)
       logging.info("Model Parameters = %fMB", utils.count_parameters_in_MB(model))
       logging.info('Training Model...')
-      next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model, train_queue, valid_queue, test_queue)
-      logging.info("Best Training Accuracy %f Best Validation Accuracy %f", next_arch_train_acc, next_arch_test_acc)
+      next_arch_train_acc = train_test(args, classes, model, train_queue, valid_queue, test_queue)
+      logging.info("Best Training Accuracy %f ", next_arch_train_acc)
 
       #if next_arch_test_acc > curr_arch_test_acc + 0.10: ######### Add arg
-      if next_arch_test_acc > curr_arch_test_acc: ######### Add arg      
+      if next_arch_train_acc > curr_arch_train_acc: ######### Add arg      
         curr_arch_ops = next_arch_ops
         curr_arch_kernel = next_arch_kernel
         curr_arch_train_acc = next_arch_train_acc
-        curr_arch_test_acc = next_arch_test_acc
+        # curr_arch_test_acc = next_arch_test_acc
       else:
         next_arch_ops[i] = 0
 
-  return curr_arch_ops, curr_arch_kernel, curr_arch_train_acc, curr_arch_test_acc  
+  return curr_arch_ops, curr_arch_kernel, curr_arch_train_acc  
 
 def search_kernels(args, classes, input_shape, train_queue, valid_queue, test_queue, model_info):
 
@@ -393,22 +381,22 @@ def search_kernels(args, classes, input_shape, train_queue, valid_queue, test_qu
         logging.info('Total number of epochs %f', args.epochs)
         logging.info("Model Parameters = %fMB", utils.count_parameters_in_MB(model))
         logging.info('Training Model...')
-        next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model, train_queue, valid_queue, test_queue)
-        logging.info("Best Training Accuracy %f Best Validation Accuracy %f", next_arch_train_acc, next_arch_test_acc)
+        next_arch_train_acc = train_test(args, classes, model, train_queue, valid_queue, test_queue)
+        logging.info("Best Training Accuracy %f ", next_arch_train_acc)
 
 
         # Bigger kernel comes at a cost therefore possibility of a search hyper parameter exists.
         #if (next_arch_test_acc > curr_arch_test_acc + 0.10): # Add args
-        if next_arch_test_acc > curr_arch_test_acc: ######### Add arg
+        if next_arch_train_acc > curr_arch_train_acc: ######### Add arg
           best_k = k
           curr_arch_ops = next_arch_ops
           curr_arch_kernel[i] = k
           curr_arch_train_acc = next_arch_train_acc
-          curr_arch_test_acc = next_arch_test_acc
+          # curr_arch_test_acc = next_arch_test_acc
         else:
           next_arch_kernel[i] = best_k
         
-  return curr_arch_ops, curr_arch_kernel, curr_arch_train_acc, curr_arch_test_acc
+  return curr_arch_ops, curr_arch_kernel, curr_arch_train_acc
 
 def search_ops_and_ks_simultaneous(args, classes, input_shape, train_queue, valid_queue, test_queue, model_info):
 
@@ -418,7 +406,6 @@ def search_ops_and_ks_simultaneous(args, classes, input_shape, train_queue, vali
   curr_arch_ops = model_info['curr_arch_ops']
   curr_arch_kernel = model_info['curr_arch_kernel']
   curr_arch_train_acc = model_info['curr_arch_train_acc']
-  curr_arch_test_acc = model_info['curr_arch_test_acc']
   channels = model_info['f_channels']
   layers = model_info['f_layers']
 
@@ -446,17 +433,16 @@ def search_ops_and_ks_simultaneous(args, classes, input_shape, train_queue, vali
         logging.info('Total number of epochs %f', args.epochs)
         logging.info("Model Parameters = %fMB", utils.count_parameters_in_MB(model))
         logging.info('Training Model...')
-        next_arch_train_acc, next_arch_test_acc = train_test(args, classes, model, train_queue, valid_queue, test_queue)
-        logging.info("Best Training Accuracy %f Best Validation Accuracy %f", next_arch_train_acc, next_arch_test_acc)
+        next_arch_train_acc = train_test(args, classes, model, train_queue, valid_queue, test_queue)
+        logging.info("Best Training Accuracy %f ", next_arch_train_acc)
 
         # Bigger kernel comes at a cost therefore possibility of a search hyper parameter exists.
-        if (next_arch_test_acc > curr_arch_test_acc):
+        if (next_arch_train_acc > curr_arch_train_acc):
           curr_arch_ops = next_arch_ops
           curr_arch_kernel = next_arch_kernel
           curr_arch_train_acc = next_arch_train_acc
-          curr_arch_test_acc = next_arch_test_acc
 
-  return curr_arch_ops, curr_arch_kernel, curr_arch_train_acc, curr_arch_test_acc    
+  return curr_arch_ops, curr_arch_kernel, curr_arch_train_acc,     
 
 def search_kernels_and_operations(args, classes, input_shape, train_queue, valid_queue, test_queue, model_info):
 
@@ -505,40 +491,27 @@ def train_test(args, classes, model, train_queue, valid_queue, test_queue):
     train_acc, train_obj = train(train_queue, model, criterion, optimizer)
     #logging.info('train_acc %f', train_acc)
 
-    if args.valid_size == 0:
-      valid_acc, valid_obj = infer(test_queue, model, criterion)
-    else:
-      valid_acc, valid_obj = infer(valid_queue, model, criterion)
-
+    
     if epoch % args.report_freq == 0:
       logging.info('epoch %d lr %e', epoch, scheduler.get_lr()[0])	
       logging.info('train_acc %f', train_acc)  
-      logging.info('valid_acc %f', valid_acc)
+      # logging.info('valid_acc %f', valid_acc)
        
 
     end_time = time.time()
     duration = end_time - start_time
     print('Epoch time: %ds.' %duration)
     print('Train acc: %f ' %train_acc)
-    print('Valid_acc: %f ' %valid_acc)
 
     if train_acc > best_train_acc:
       best_train_acc = train_acc
-
-    if valid_acc > best_test_acc:
-      best_test_acc = valid_acc
       utils.save(model, os.path.join(args.save, 'weights.pt'))
 
-    #if best_train_acc == 100:
-    #	break
-    	
 
   logging.info('Best Training Accuracy %f', best_train_acc)
-  logging.info('Best Validation Accuracy %f', best_test_acc)
   utils.load(model, os.path.join(args.save, 'weights.pt'))
-  classwisetest(model, classes, test_queue, criterion)
 
-  return best_train_acc, best_test_acc
+  return best_train_acc
 
 def train(train_queue, model, criterion, optimizer):
   objs = utils.AvgrageMeter()
@@ -568,81 +541,6 @@ def train(train_queue, model, criterion, optimizer):
     #  logging.info('train %03d %e %f', step, objs.avg, top1.avg)
 
   return top1.avg, objs.avg
-
-def infer(valid_queue, model, criterion):
-  objs = utils.AvgrageMeter()
-  top1 = utils.AvgrageMeter()
-
-  model.eval()
-
-  for step, (input, target) in enumerate(valid_queue):
-    input = input.cuda(non_blocking=True)
-    target = target.cuda(non_blocking=True)
-
-    with torch.no_grad():
-      logits = model(input)
-      loss = criterion(logits, target)
-
-    prec1 = utils.accuracy(logits, target, topk=(1,))
-    n = input.size(0)
-    objs.update(loss.data.item(), n)
-    #top1.update(prec1.data.item(), n)
-    top1.update(prec1, n)
-    #if step % args.report_freq == 0:
-    #  logging.info('valid %03d %e %f', step, objs.avg, top1.avg)
-
-  return top1.avg, objs.avg
-
-def classwisetest(model, classes, test_queue, criterion):
-
-    
-    num_classes = len(classes)
-    # track test loss
-    test_loss = 0.0
-    class_correct = list(0. for i in range(num_classes))
-    class_total = list(0. for i in range(num_classes))
-    
-    model.eval()
-    # iterate over test data
-    for data, target in test_queue:
-        # move tensors to GPU if CUDA is available        
-        data, target = data.cuda(), target.cuda()
-        # forward pass: compute predicted outputs by passing inputs to the model
-        output = model(data)
-        # calculate the batch loss
-        loss = criterion(output, target)
-        # update test loss 
-        test_loss += loss.item()*data.size(0)
-        # convert output probabilities to predicted class
-        _, pred = torch.max(output, 1)    
-        # compare predictions to true label
-        correct_tensor = pred.eq(target.data.view_as(pred))
-        correct = np.squeeze(correct_tensor.cpu().numpy())
-        #correct = np.squeeze(correct_tensor.numpy()) if not train_on_gpu else np.squeeze(correct_tensor.cpu().numpy())
-        
-        # calculate test accuracy for each object class
-        for i in range(len(target)):
-            #print(i)
-            label = target.data[i]
-            class_correct[label] += correct[i].item()
-            class_total[label] += 1
-
-    # average test loss
-    test_loss = test_loss/len(test_queue.dataset)
-    
-    logging.info('Test Loss: {:.6f}\n'.format(test_loss))
-
-    for i in range(num_classes):
-        if class_total[i] > 0:
-            logging.info('Test Accuracy of %5s: %2d%% (%2d/%2d)' % (
-                classes[i], 100 * class_correct[i] / class_total[i],
-                np.sum(class_correct[i]), np.sum(class_total[i])))
-        else:
-            logging.info('Test Accuracy of %5s: N/A (no training examples)' % (classes[i]))
-
-    logging.info('\nTest Accuracy (Overall): %2f%% (%2d/%2d)' % (
-        100. * np.sum(class_correct) / np.sum(class_total),
-        np.sum(class_correct), np.sum(class_total)))    
 
 
 if __name__ == '__main__':
